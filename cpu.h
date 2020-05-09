@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdint.h>
 #ifndef MEMORY_H
 #define MEMORY_H
 #include "memory.h"

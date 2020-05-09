@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 #ifndef CPU_H
 #define CPU_H
 #include "cpu.h"

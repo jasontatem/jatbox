@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdint.h>
 
 int extract_bits(int32_t number, int k, int p) 
 { 
