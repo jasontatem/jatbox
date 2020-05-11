@@ -112,6 +112,9 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 		case 8: // Compare
 			cpu->status = opcode_8_compare(currentInstruction, cpu, payload);
 			break;
+		case 9: // Branch
+			cpu->status = opcode_9_branch(currentInstruction, cpu, payload);
+			break;
 		default:
 			cpu->err = ERR_INVALID_OPCODE;
 	}

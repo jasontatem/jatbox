@@ -76,3 +76,21 @@ int32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, int32_t
 	return 0;
 }
 
+int32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, int32_t payload[2]){
+	// arg1 in instruction used to determine if we jump or goto
+	// 0 = goto, non-0 = jump w/ return
+	// put 0 in status if we take the branch, 1 if we don't
+	int32_t compare_value = payload[0];
+	int32_t jump_destination = payload[1];
+	if (cpu->status == compare_value){
+		if (currentInstruction.arg1 == 0){
+			cpu->ip = jump_destination - 1;
+		} else {
+			stack_push(cpu, cpu->ip, cpu->ip, jump_destination);
+			cpu->ip = jump_destination - 1;
+		}
+		return 0;
+	}
+	return 1;
+}
+

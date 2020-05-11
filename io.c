@@ -18,6 +18,11 @@ int32_t io_dispatcher(systemmemory *mem){
 }
 
 int32_t serial_console_handler(systemmemory *mem){
+	// packing within int32_t:
+	// -- bits 1-8: data_sent flag
+	// -- bits 9-16: data_ack flag
+	// -- bits 17-24: data_status
+	// -- bits 25-32: data_value
 	// see what we have from the host
 	//printf("serial handler start\n");
 	int32_t send_field = mem->memory[SERIAL_CONSOLE_SEND_TO];
