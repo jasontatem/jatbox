@@ -27,7 +27,11 @@ opcodes = [
     Opcode('noop', 0, lambda x:x == 0, None, None),
     Opcode('store', 1, lambda x:x == 2, None, None),
     Opcode('copy', 2, lambda x:x == 2, None, None),
-    Opcode('add', 3, lambda x:x == 3, None, None)
+    Opcode('add', 3, lambda x:x == 3, None, None),
+    Opcode('jump', 4, lambda x:x == 1, None, None),
+    Opcode('return', 5, None, None, None),
+    Opcode('goto', 6, lambda x:x == 1, None, None),
+    Opcode('halt', 7, None, None, None)
 ]
 
 
@@ -85,5 +89,10 @@ def write_bin(file_name, instructions):
         f.write(b''.join([i.out() for i in instructions]))
 
 if __name__=='__main__':
-    inst = read_asm('./test.asm')
-    write_bin('../jatbox/test.bin', inst)
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', default='./test.asm')
+    parser.add_argument('-o', default='../test.bin')
+    args = parser.parse_args()
+    inst = read_asm(args.i)
+    write_bin(args.o, inst)
