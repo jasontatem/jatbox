@@ -101,7 +101,6 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 			cpu->status = opcode_4_jump(currentInstruction, cpu, payload);
 			break;
 		case 5: // Return
-			//printf("My pointer: %p\n", cpu);
 			cpu->status = opcode_5_return(currentInstruction, cpu);
 			break;
 		case 6: // Goto
@@ -109,6 +108,9 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 			break;
 		case 7: // Halt
 			cpu->status = opcode_7_halt(currentInstruction, cpu);
+			break;
+		case 8: // Compare
+			cpu->status = opcode_8_compare(currentInstruction, cpu, payload);
 			break;
 		default:
 			cpu->err = ERR_INVALID_OPCODE;

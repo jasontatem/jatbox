@@ -5,6 +5,11 @@
 #include "cpu.h"
 #endif
 
+#define COMPARE_RESULT_GT 1
+#define COMPARE_RESULT_LT 2
+#define COMPARE_RESULT_EQ 3
+
+
 
 int32_t opcode_0_noop(instruction currentInstruction, systemcpu *cpu){
 	//printf("bah");
@@ -44,9 +49,6 @@ int32_t opcode_4_jump(instruction currentInstruction, systemcpu *cpu, int32_t pa
 }
 
 int32_t opcode_5_return(instruction currentInstruction, systemcpu *cpu){
-	//printf("Calling stack_pop\n");
-	//printf("CPU pointer: %p\n", cpu); 
-	//printf("IP check: %d", cpu->ip);
 	stack_pop(cpu);
 	return 0;
 }
@@ -59,5 +61,18 @@ int32_t opcode_6_goto(instruction currentInstruction, systemcpu *cpu, int32_t pa
 
 int32_t opcode_7_halt(instruction currentInstruction, systemcpu *cpu){
 	return CPU_STATUS_HALT;
+}
+
+int32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, int32_t payload[2]){
+	if (payload[0] > payload[1]){
+		return COMPARE_RESULT_GT;
+	}
+		if (payload[0] < payload[1]){
+		return COMPARE_RESULT_LT;
+	}
+		if (payload[0] == payload[1]){
+		return COMPARE_RESULT_EQ;
+	}
+	return 0;
 }
 
