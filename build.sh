@@ -1,6 +1,7 @@
 #!/bin/bash
 
-export GCCARGS="-fno-stack-protector"
+#export GCCARGS="-fno-stack-protector"
+export GCCARGS=""
 
 rm *.o
 gcc $GCCARGS -c util.c
