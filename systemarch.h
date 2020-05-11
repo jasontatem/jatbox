@@ -9,5 +9,5 @@ typedef struct SystemArch {
 	systemmemory *memory;
 } systemarch;
 
-systemarch system_init(void);
-void system_tick(systemarch sys);
+void system_init(systemarch *sys);
+void system_tick(systemarch *sys);

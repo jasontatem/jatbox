@@ -31,7 +31,7 @@ typedef struct Instruction {
 } instruction;
 
 int32_t cpu_init(systemcpu *cpu);
-int32_t stack_push(systemcpu *cpu, int32_t called_from, int32_t return_to);
+int32_t stack_push(systemcpu *cpu, int32_t called_from, int32_t return_to, int32_t jumped_to);
 int32_t stack_pop(systemcpu *cpu);
 instruction decode_instruction(int32_t raw_instruction);
 void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu);
@@ -41,3 +41,8 @@ void cpu_tick(systemcpu *cpu);
 #define ERR_STACK_OVERFLOW 1
 #define ERR_POP_EMPTY_STACK 2
 #define ERR_POP_NULL_FRAME 3
+#define ERR_INVALID_OPCODE 4
+
+// Status Codes
+#define CPU_STATUS_HALT 1
+#define CPU_STATUS_ERR 2

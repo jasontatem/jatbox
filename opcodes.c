@@ -35,3 +35,29 @@ int32_t opcode_3_add(instruction currentInstruction, systemcpu *cpu, int32_t pay
 	return 0;
 }
 
+int32_t opcode_4_jump(instruction currentInstruction, systemcpu *cpu, int32_t payload[1]){
+	int32_t jump_destination = payload[0];
+	int32_t calling_location = cpu->ip;
+	stack_push(cpu, calling_location, calling_location, jump_destination);
+	cpu->ip = jump_destination - 1;
+	return 0;
+}
+
+int32_t opcode_5_return(instruction currentInstruction, systemcpu *cpu){
+	//printf("Calling stack_pop\n");
+	//printf("CPU pointer: %p\n", cpu); 
+	//printf("IP check: %d", cpu->ip);
+	stack_pop(cpu);
+	return 0;
+}
+
+int32_t opcode_6_goto(instruction currentInstruction, systemcpu *cpu, int32_t payload[1]){
+	int32_t destination = payload[0];
+	cpu->ip = destination - 1;
+	return 0;
+}
+
+int32_t opcode_7_halt(instruction currentInstruction, systemcpu *cpu){
+	return CPU_STATUS_HALT;
+}
+
