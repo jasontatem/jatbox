@@ -26,9 +26,17 @@ int32_t opcode_1_store_mem(instruction currentInstruction, systemcpu *cpu, int32
 }
 
 int32_t opcode_2_copy_mem(instruction currentInstruction, systemcpu *cpu, int32_t payload[2]){
+	// arg1 sets the mode of the copy
+	// - 0: value at memory[source] is copied
+	// - non-zero: value at memory[memory[source]] is copied
 	int32_t source = payload[0];
 	int32_t destination = payload[1];
-	cpu->mem->memory[destination] = cpu->mem->memory[source];
+	if (currentInstruction.arg1 == 0){
+		cpu->mem->memory[destination] = cpu->mem->memory[source];
+	} else {
+		cpu->mem->memory[destination] = cpu->mem->memory[cpu->mem->memory[source]];
+	}
+	
 	return 0;
 }
 
@@ -71,13 +79,28 @@ int32_t opcode_7_halt(instruction currentInstruction, systemcpu *cpu){
 }
 
 int32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, int32_t payload[2]){
-	if (payload[0] > payload[1]){
+	//instruction args determine if treated as explicit value or mem ref
+	// arg1/2 = 0: treat payload[0/1] as explicit value
+	// arg1/2 = non-zero: treat payload[0/1] as mem ref
+	int32_t a, b;
+	if (currentInstruction.arg1 == 0){
+		a = payload[0];
+	} else {
+		a = cpu->mem->memory[payload[0]];
+	}
+	if (currentInstruction.arg2 == 0){
+		b = payload[1];
+	} else {
+		b = cpu->mem->memory[payload[1]];
+	}
+
+	if (a > b){
 		return COMPARE_RESULT_GT;
 	}
-		if (payload[0] < payload[1]){
+		if (a < b){
 		return COMPARE_RESULT_LT;
 	}
-		if (payload[0] == payload[1]){
+		if (a == b){
 		return COMPARE_RESULT_EQ;
 	}
 	return 0;
