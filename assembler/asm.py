@@ -31,7 +31,9 @@ opcodes = [
     Opcode('jump', 4, lambda x:x == 1, None, None),
     Opcode('return', 5, None, None, None),
     Opcode('goto', 6, lambda x:x == 1, None, None),
-    Opcode('halt', 7, None, None, None)
+    Opcode('halt', 7, None, None, None),
+    Opcode('compare', 8, lambda x:x == 2, None, None),
+    Opcode('branch', 9, lambda x:x == 2, None, None)
 ]
 
 
