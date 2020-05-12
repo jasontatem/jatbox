@@ -33,10 +33,17 @@ int32_t opcode_2_copy_mem(instruction currentInstruction, systemcpu *cpu, int32_
 }
 
 int32_t opcode_3_add(instruction currentInstruction, systemcpu *cpu, int32_t payload[3]){
+	// arg1 sets the mode of the add
+	// - 0: both a and b are memory locations
+	// - non-zero: a is a mem location, b is an explicit value
 	int32_t a = payload[0];
 	int32_t b = payload[1];
 	int32_t destination = payload[2];
-	cpu->mem->memory[destination] = a + b;
+	if (currentInstruction.arg1 == 0){
+		cpu->mem->memory[destination] = cpu->mem->memory[a] + cpu->mem->memory[b];
+	} else {
+		cpu->mem->memory[destination] = cpu->mem->memory[a] + b;
+	}
 	return 0;
 }
 
