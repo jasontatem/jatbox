@@ -9,14 +9,14 @@
 #include "io.h"
 
 int32_t cpu_init(systemcpu *cpu){
-	printf("CPU pointer at start of cpu_init: %p\n", cpu);
+	//printf("CPU pointer at start of cpu_init: %p\n", cpu);
 	cpu->sp = 0;
 	cpu->ip = INITIAL_IP;
 	cpu->err = 0;
 	cpu->status = 0;
 	cpu->result = 0;
 	cpu->tick = 0;
-	printf("CPU pointer at end of cpu_init: %p\n", cpu);
+	//printf("CPU pointer at end of cpu_init: %p\n", cpu);
 	return 0;
 };
 
