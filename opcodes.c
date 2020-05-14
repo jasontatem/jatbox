@@ -47,18 +47,21 @@ int32_t opcode_3_add(instruction currentInstruction, systemcpu *cpu, int32_t pay
 	int32_t a = payload[0];
 	int32_t b = payload[1];
 	int32_t destination = payload[2];
+	printf("Add: arg1: %d a: %d b: %d destination: %d\n", currentInstruction.arg1, a, b, destination);
 	if (currentInstruction.arg1 == 0){
+		printf("Treating both as locations. Value at a: %d Value at b: %d\n", cpu->mem->memory[a], cpu->mem->memory[b]);
 		cpu->mem->memory[destination] = cpu->mem->memory[a] + cpu->mem->memory[b];
 	} else {
 		cpu->mem->memory[destination] = cpu->mem->memory[a] + b;
 	}
+	printf("Add: value at destination: %d\n", cpu->mem->memory[destination]);
 	return 0;
 }
 
 int32_t opcode_4_jump(instruction currentInstruction, systemcpu *cpu, int32_t payload[1]){
 	int32_t jump_destination = payload[0];
-	int32_t calling_location = cpu->ip;
-	stack_push(cpu, calling_location, calling_location, jump_destination);
+	int32_t return_to = cpu->ip;
+	stack_push(cpu, return_to, return_to, jump_destination);
 	cpu->ip = jump_destination - 1;
 	return 0;
 }
@@ -93,15 +96,15 @@ int32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, int32_t
 	} else {
 		b = cpu->mem->memory[payload[1]];
 	}
-
+	printf("Comparing a: %d b: %d\n", a, b);
 	if (a > b){
-		return COMPARE_RESULT_GT;
+		cpu->result = COMPARE_RESULT_GT;
 	}
 		if (a < b){
-		return COMPARE_RESULT_LT;
+		cpu->result = COMPARE_RESULT_LT;
 	}
 		if (a == b){
-		return COMPARE_RESULT_EQ;
+		cpu->result = COMPARE_RESULT_EQ;
 	}
 	return 0;
 }
@@ -109,18 +112,20 @@ int32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, int32_t
 int32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, int32_t payload[2]){
 	// arg1 in instruction used to determine if we jump or goto
 	// 0 = goto, non-0 = jump w/ return
-	// put 0 in status if we take the branch, 1 if we don't
 	int32_t compare_value = payload[0];
 	int32_t jump_destination = payload[1];
-	if (cpu->status == compare_value){
+	printf("Branch: compare_value: %d jump_destination: %d\n", compare_value, jump_destination);
+	if (cpu->result == compare_value){
 		if (currentInstruction.arg1 == 0){
+			printf("Branch taken, goto style\n");
 			cpu->ip = jump_destination - 1;
 		} else {
+			printf("Branch taken, jump style\n");
 			stack_push(cpu, cpu->ip, cpu->ip, jump_destination);
 			cpu->ip = jump_destination - 1;
 		}
-		return 0;
 	}
-	return 1;
+	printf("Branch not taken\n");
+	return 0;
 }
 
