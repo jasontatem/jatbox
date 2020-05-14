@@ -23,4 +23,4 @@ compare 2 1 1 999000 999001 # compare counter to target value
 branch 2 0 0 3 ``SUB_RETURN # branch to exit from routine 
 goto 1 0 0 ``LOOP # back to loop start
 ::SUB_RETURN
-return 0 0 0 # 1000066
+return 0 0 0
