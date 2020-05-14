@@ -19,6 +19,7 @@ int32_t opcode_6_goto(instruction currentInstruction, systemcpu *cpu, int32_t pa
 int32_t opcode_7_halt(instruction currentInstruction, systemcpu *cpu);
 int32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, int32_t payload[2]);
 int32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, int32_t payload[2]);
+int32_t opcode_10_mult(instruction currentInstruction, systemcpu *cpu, int32_t payload[3]);
 
 
 

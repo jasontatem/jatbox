@@ -47,14 +47,14 @@ int32_t opcode_3_add(instruction currentInstruction, systemcpu *cpu, int32_t pay
 	int32_t a = payload[0];
 	int32_t b = payload[1];
 	int32_t destination = payload[2];
-	printf("Add: arg1: %d a: %d b: %d destination: %d\n", currentInstruction.arg1, a, b, destination);
+	//printf("Add: arg1: %d a: %d b: %d destination: %d\n", currentInstruction.arg1, a, b, destination);
 	if (currentInstruction.arg1 == 0){
-		printf("Treating both as locations. Value at a: %d Value at b: %d\n", cpu->mem->memory[a], cpu->mem->memory[b]);
+		//printf("Treating both as locations. Value at a: %d Value at b: %d\n", cpu->mem->memory[a], cpu->mem->memory[b]);
 		cpu->mem->memory[destination] = cpu->mem->memory[a] + cpu->mem->memory[b];
 	} else {
 		cpu->mem->memory[destination] = cpu->mem->memory[a] + b;
 	}
-	printf("Add: value at destination: %d\n", cpu->mem->memory[destination]);
+	//printf("Add: value at destination: %d\n", cpu->mem->memory[destination]);
 	return 0;
 }
 
@@ -96,7 +96,7 @@ int32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, int32_t
 	} else {
 		b = cpu->mem->memory[payload[1]];
 	}
-	printf("Comparing a: %d b: %d\n", a, b);
+	//printf("Comparing a: %d b: %d\n", a, b);
 	if (a > b){
 		cpu->result = COMPARE_RESULT_GT;
 	}
@@ -114,18 +114,37 @@ int32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, int32_t 
 	// 0 = goto, non-0 = jump w/ return
 	int32_t compare_value = payload[0];
 	int32_t jump_destination = payload[1];
-	printf("Branch: compare_value: %d jump_destination: %d\n", compare_value, jump_destination);
+	//printf("Branch: compare_value: %d jump_destination: %d\n", compare_value, jump_destination);
 	if (cpu->result == compare_value){
 		if (currentInstruction.arg1 == 0){
-			printf("Branch taken, goto style\n");
+			//printf("Branch taken, goto style\n");
 			cpu->ip = jump_destination - 1;
 		} else {
-			printf("Branch taken, jump style\n");
+			//printf("Branch taken, jump style\n");
 			stack_push(cpu, cpu->ip, cpu->ip, jump_destination);
 			cpu->ip = jump_destination - 1;
 		}
+		return 0;
 	}
-	printf("Branch not taken\n");
+	//printf("Branch not taken\n");
+	return 0;
+}
+
+int32_t opcode_10_mult(instruction currentInstruction, systemcpu *cpu, int32_t payload[3]){
+	// arg1 sets the mode of the mult
+	// - 0: both a and b are memory locations
+	// - non-zero: a is a mem location, b is an explicit value
+	int32_t a = payload[0];
+	int32_t b = payload[1];
+	int32_t destination = payload[2];
+	//printf("Mult: arg1: %d a: %d b: %d destination: %d\n", currentInstruction.arg1, a, b, destination);
+	if (currentInstruction.arg1 == 0){
+		//printf("Treating both as locations. Value at a: %d Value at b: %d\n", cpu->mem->memory[a], cpu->mem->memory[b]);
+		cpu->mem->memory[destination] = cpu->mem->memory[a] * cpu->mem->memory[b];
+	} else {
+		cpu->mem->memory[destination] = cpu->mem->memory[a] * b;
+	}
+	//printf("Mult: value at destination: %d\n", cpu->mem->memory[destination]);
 	return 0;
 }
 

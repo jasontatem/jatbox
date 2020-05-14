@@ -1,3 +1,5 @@
+label_sep = '::'
+
 class Opcode(object):
     def __init__(self, op_name, op_number, length_condition, arg1_condition, arg2_condition):
         self.op_name = op_name
@@ -33,7 +35,8 @@ opcodes = [
     Opcode('goto', 6, lambda x:x == 1, None, None),
     Opcode('halt', 7, None, None, None),
     Opcode('compare', 8, lambda x:x == 2, None, None),
-    Opcode('branch', 9, lambda x:x == 2, None, None)
+    Opcode('branch', 9, lambda x:x == 2, None, None),
+    Opcode('mult', 10, lambda x:x == 3, None, None)
 ]
 
 
@@ -81,7 +84,7 @@ class Instruction(object):
 def read_asm(file_name):
     with open(file_name, 'r') as f:
         data = f.read()
-        lines = data.split('\n')
+        lines = [l.split('#')[0] for l in data.split('\n')]
         instructions = [Instruction(line) for line in lines if line != '']
     return instructions
 

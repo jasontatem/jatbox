@@ -13,10 +13,11 @@ halt 0 0 0 # 1000032
 copy 2 0 0 999980 999000 # read arg1 (start addr) into BIOS working mem 1000033
 add 3 0 0 999980 999981 999001 # add arg1 and arg2, store result in BIOS working mem 1000036
 copy 2 1 0 999000 999002 # copy value pointed to by 999000 into 999002 1000040
-add 3 1 0 999002 16777216 999002 # add data_send bit to value in 999002 1000043
-copy 2 0 0 999002 16000000 # copy data to serial terminal output location 1000047
-add 3 1 0 999000 1 999000 # increment counter 1000050
-compare 2 1 1 999000 999001 # compare counter to target value 1000054
-branch 2 0 0 3 1000062 # branch to exit from routine 1000057
-goto 1 0 0 1000040 # back to 'copy 2 1 0 999000 999002' 1000060
-return 0 0 0 # 1000062
+mult 3 1 0 999002 16777216 999002 # bit shift value in 999002 1000043
+add 3 1 0 999002 1 999002 # add 1 to value in 999002 (send flag serial expects) 100047
+copy 2 0 0 999002 16000000 # copy data to serial terminal output location 1000051
+add 3 1 0 999000 1 999000 # increment counter 1000054
+compare 2 1 1 999000 999001 # compare counter to target value 1000058
+branch 2 0 0 3 1000066 # branch to exit from routine 1000061
+goto 1 0 0 1000040 # back to 'copy 2 1 0 999000 999002' 1000064
+return 0 0 0 # 1000066
