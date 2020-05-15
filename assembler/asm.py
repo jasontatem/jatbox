@@ -37,7 +37,9 @@ opcodes = [
     Opcode('halt', 7, None, None, None),
     Opcode('compare', 8, lambda x:x == 2, None, None),
     Opcode('branch', 9, lambda x:x == 2, None, None),
-    Opcode('mult', 10, lambda x:x == 3, None, None)
+    Opcode('mult', 10, lambda x:x == 3, None, None),
+    Opcode('div', 11, lambda x:x == 3, None, None),
+    Opcode('sub', 12, lambda x:x == 3, None, None)
 ]
 
 

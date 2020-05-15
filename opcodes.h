@@ -20,6 +20,8 @@ uint32_t opcode_7_halt(instruction currentInstruction, systemcpu *cpu);
 uint32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]);
 uint32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]);
 uint32_t opcode_10_mult(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
+uint32_t opcode_11_div(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
+uint32_t opcode_12_sub(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
 
 
 

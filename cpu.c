@@ -65,7 +65,7 @@ instruction decode_instruction(uint32_t raw_instruction){
 	newInstruction.payload_len = extract_bits(raw_instruction, 8, 9);
 	newInstruction.arg1 = extract_bits(raw_instruction, 8, 17);
 	newInstruction.arg2 = extract_bits(raw_instruction, 8, 25);
-    printf("Raw: %d  Opcode: %d  Len: %d  Arg1: %d  Arg2: %d\n", raw_instruction, newInstruction.opcode, newInstruction.payload_len, newInstruction.arg1, newInstruction.arg2);
+    //printf("Raw: %d  Opcode: %d  Len: %d  Arg1: %d  Arg2: %d\n", raw_instruction, newInstruction.opcode, newInstruction.payload_len, newInstruction.arg1, newInstruction.arg2);
 	return newInstruction;
 }
 
@@ -112,6 +112,12 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 			break;
 		case 10: // Multiply
 			cpu->status = opcode_10_mult(currentInstruction, cpu, payload);
+			break;
+		case 11: // Divide
+			cpu->status = opcode_11_div(currentInstruction, cpu, payload);
+			break;
+		case 12: // Subtract
+			cpu->status = opcode_12_sub(currentInstruction, cpu, payload);
 			break;
 		default:
 			cpu->err = ERR_INVALID_OPCODE;

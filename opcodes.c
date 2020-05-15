@@ -16,11 +16,9 @@ uint32_t opcode_0_noop(instruction currentInstruction, systemcpu *cpu){
 	return 0;
 };
 
-uint32_t opcode_1_store_mem(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]){
-	//printf("store_mem\n");
+uint32_t opcode_1_store_mem(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]){ 
 	uint32_t value = payload[0];
 	uint32_t location = payload[1];
-	//printf("Value: %d  Location: %d\n", value, location);
 	cpu->mem->memory[location] = value;
 	return 0;
 }
@@ -85,7 +83,7 @@ uint32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, uint32
 	//instruction args determine if treated as explicit value or mem ref
 	// arg1/2 = 0: treat payload[0/1] as explicit value
 	// arg1/2 = non-zero: treat payload[0/1] as mem ref
-	printf("Compare: arg1: %d arg2: %d p1: %d p2: %d\n", currentInstruction.arg1, currentInstruction.arg2, payload[0], payload[1]);
+	//printf("Compare: arg1: %d arg2: %d p1: %d p2: %d\n", currentInstruction.arg1, currentInstruction.arg2, payload[0], payload[1]);
 	uint32_t a, b;
 	if (currentInstruction.arg1 == 0){
 		a = payload[0];
@@ -97,7 +95,7 @@ uint32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, uint32
 	} else {
 		b = cpu->mem->memory[payload[1]];
 	}
-	printf("Comparing a: %d b: %d\n", a, b);
+	//printf("Comparing a: %d b: %d\n", a, b);
 	if (a > b){
 		cpu->result = COMPARE_RESULT_GT;
 	}
@@ -146,6 +144,42 @@ uint32_t opcode_10_mult(instruction currentInstruction, systemcpu *cpu, uint32_t
 		cpu->mem->memory[destination] = cpu->mem->memory[a] * b;
 	}
 	//printf("Mult: value at destination: %d\n", cpu->mem->memory[destination]);
+	return 0;
+}
+
+uint32_t opcode_11_div(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]){
+	// arg1 sets the mode of the divide
+	// - 0: both a and b are memory locations
+	// - non-zero: a is a mem location, b is an explicit value
+	uint32_t a = payload[0];
+	uint32_t b = payload[1];
+	uint32_t destination = payload[2];
+	//printf("Div: arg1: %d a: %d b: %d destination: %d\n", currentInstruction.arg1, a, b, destination);
+	if (currentInstruction.arg1 == 0){
+		//printf("Treating both as locations. Value at a: %d Value at b: %d\n", cpu->mem->memory[a], cpu->mem->memory[b]);
+		cpu->mem->memory[destination] = cpu->mem->memory[a] / cpu->mem->memory[b];
+	} else {
+		cpu->mem->memory[destination] = cpu->mem->memory[a] / b;
+	}
+	//printf("Div: value at destination: %d\n", cpu->mem->memory[destination]);
+	return 0;
+}
+
+uint32_t opcode_12_sub(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]){
+	// arg1 sets the mode of the add
+	// - 0: both a and b are memory locations
+	// - non-zero: a is a mem location, b is an explicit value
+	uint32_t a = payload[0];
+	uint32_t b = payload[1];
+	uint32_t destination = payload[2];
+	//printf("Sub: arg1: %d a: %d b: %d destination: %d\n", currentInstruction.arg1, a, b, destination);
+	if (currentInstruction.arg1 == 0){
+		//printf("Treating both as locations. Value at a: %d Value at b: %d\n", cpu->mem->memory[a], cpu->mem->memory[b]);
+		cpu->mem->memory[destination] = cpu->mem->memory[a] - cpu->mem->memory[b];
+	} else {
+		cpu->mem->memory[destination] = cpu->mem->memory[a] - b;
+	}
+	//printf("Sub: value at destination: %d\n", cpu->mem->memory[destination]);
 	return 0;
 }
 
