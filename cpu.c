@@ -65,7 +65,7 @@ instruction decode_instruction(int32_t raw_instruction){
 	newInstruction.payload_len = extract_bits(raw_instruction, 8, 9);
 	newInstruction.arg1 = extract_bits(raw_instruction, 8, 17);
 	newInstruction.arg2 = extract_bits(raw_instruction, 8, 25);
-    //printf("Raw: %d  Opcode: %d  Len: %d  Arg1: %d  Arg2: %d\n", raw_instruction, newInstruction.opcode, newInstruction.payload_len, newInstruction.arg1, newInstruction.arg2);
+    printf("Raw: %d  Opcode: %d  Len: %d  Arg1: %d  Arg2: %d\n", raw_instruction, newInstruction.opcode, newInstruction.payload_len, newInstruction.arg1, newInstruction.arg2);
 	return newInstruction;
 }
 

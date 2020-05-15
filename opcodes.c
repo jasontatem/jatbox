@@ -85,6 +85,7 @@ int32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, int32_t
 	//instruction args determine if treated as explicit value or mem ref
 	// arg1/2 = 0: treat payload[0/1] as explicit value
 	// arg1/2 = non-zero: treat payload[0/1] as mem ref
+	printf("Compare: arg1: %d arg2: %d p1: %d p2: %d\n", currentInstruction.arg1, currentInstruction.arg2, payload[0], payload[1]);
 	int32_t a, b;
 	if (currentInstruction.arg1 == 0){
 		a = payload[0];
@@ -96,7 +97,7 @@ int32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, int32_t
 	} else {
 		b = cpu->mem->memory[payload[1]];
 	}
-	//printf("Comparing a: %d b: %d\n", a, b);
+	printf("Comparing a: %d b: %d\n", a, b);
 	if (a > b){
 		cpu->result = COMPARE_RESULT_GT;
 	}

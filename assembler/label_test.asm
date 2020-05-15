@@ -6,9 +6,16 @@ store 2 0 0 32 5000004
 store 2 0 0 73 5000005
 store 2 0 0 84 5000006
 store 2 0 0 10 5000007
+store 2 0 0 0 5000008
+::REPEAT
 store 2 0 0 5000000 999980
 store 2 0 0 8 999981
 jump 1 0 0 ``SUB_START
+add 3 1 0 5000008 1 5000008
+compare 2 1 0 5000008 5
+branch 2 0 0 3 ``HALT
+goto 1 0 0 ``REPEAT
+::HALT
 halt 0 0 0
 ::SUB_START
 copy 2 0 0 999980 999000 # read arg1 (start addr) into BIOS working mem 
