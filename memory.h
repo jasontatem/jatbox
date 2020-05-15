@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdint.h>
 
 #define SYSTEM_MEM_SIZE 16777216
 #define STACK_SIZE 200
@@ -10,15 +11,15 @@
 
 
 typedef struct StackFrame {
-	int32_t null_frame;
-	int32_t called_from;
-	int32_t return_to;
-	int32_t jumped_to;
+	uint32_t null_frame;
+	uint32_t called_from;
+	uint32_t return_to;
+	uint32_t jumped_to;
 } stackframe;
 
 typedef struct SystemMemory {
 	stackframe *stack;
-	int32_t *memory;
+	uint32_t *memory;
 } systemmemory;
 
 

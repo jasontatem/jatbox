@@ -11,13 +11,13 @@
 
 typedef struct Cpu {
 	// special purpose registers
-	int32_t result;  // result destination for instructions and subroutines
-	int32_t sp;  // stack pointer
-	int32_t ip;  // instruction pointer
-	int32_t err;  // error register
-	int32_t status;  // status register
-	int32_t tick;  // tick counter
-	int32_t halt;  // halt flag
+	uint32_t result;  // result destination for instructions and subroutines
+	uint32_t sp;  // stack pointer
+	uint32_t ip;  // instruction pointer
+	uint32_t err;  // error register
+	uint32_t status;  // status register
+	uint32_t tick;  // tick counter
+	uint32_t halt;  // halt flag
 	
 	// system memory
 	systemmemory *mem;
@@ -30,10 +30,10 @@ typedef struct Instruction {
 	int8_t arg2;
 } instruction;
 
-int32_t cpu_init(systemcpu *cpu);
-int32_t stack_push(systemcpu *cpu, int32_t called_from, int32_t return_to, int32_t jumped_to);
-int32_t stack_pop(systemcpu *cpu);
-instruction decode_instruction(int32_t raw_instruction);
+uint32_t cpu_init(systemcpu *cpu);
+uint32_t stack_push(systemcpu *cpu, uint32_t called_from, uint32_t return_to, uint32_t jumped_to);
+uint32_t stack_pop(systemcpu *cpu);
+instruction decode_instruction(uint32_t raw_instruction);
 void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu);
 void cpu_tick(systemcpu *cpu);
 

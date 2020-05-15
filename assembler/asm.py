@@ -85,7 +85,7 @@ class Instruction(object):
         instruction_int = self.op_number
         instruction_int += self.length * 2 ** 8
         instruction_int += self.arg1 * 2 ** 16
-        instruction_int += self.arg1 * 2 ** 24
+        instruction_int += self.arg2 * 2 ** 24
         result = list()
         result.append(instruction_int)
         if self.payload is not None:

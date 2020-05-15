@@ -11,21 +11,21 @@
 #endif
 #include "io.h"
 
-int32_t io_dispatcher(systemmemory *mem){
+uint32_t io_dispatcher(systemmemory *mem){
 	//printf("io_dispatcher\n");
 	serial_console_handler(mem);
 	return 0;
 }
 
-int32_t serial_console_handler(systemmemory *mem){
-	// packing within int32_t:
+uint32_t serial_console_handler(systemmemory *mem){
+	// packing within uint32_t:
 	// -- bits 1-8: data_sent flag
 	// -- bits 9-16: data_ack flag
 	// -- bits 17-24: data_status
 	// -- bits 25-32: data_value
 	// see what we have from the host
 	//printf("serial handler start\n");
-	int32_t send_field = mem->memory[SERIAL_CONSOLE_SEND_TO];
+	uint32_t send_field = mem->memory[SERIAL_CONSOLE_SEND_TO];
 	int8_t data_sent = extract_bits(send_field, 8, 1);
 	//printf("Send Field: %d Sent Flag: %d\n", send_field, data_sent);
 	if (data_sent == 1){

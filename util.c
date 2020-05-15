@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-int extract_bits(int32_t number, int k, int p) 
+int extract_bits(uint32_t number, int k, int p) 
 { 
     return (((1 << k) - 1) & (number >> (p - 1))); 
 };

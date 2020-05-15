@@ -8,7 +8,7 @@
 #include "opcodes.h"
 #include "io.h"
 
-int32_t cpu_init(systemcpu *cpu){
+uint32_t cpu_init(systemcpu *cpu){
 	//printf("CPU pointer at start of cpu_init: %p\n", cpu);
 	cpu->sp = 0;
 	cpu->ip = INITIAL_IP;
@@ -20,7 +20,7 @@ int32_t cpu_init(systemcpu *cpu){
 	return 0;
 };
 
-int32_t stack_push(systemcpu *cpu, int32_t called_from, int32_t return_to, int32_t jumped_to){
+uint32_t stack_push(systemcpu *cpu, uint32_t called_from, uint32_t return_to, uint32_t jumped_to){
 	//printf("PUSH: Stack Pointer: %d Called From: %d Return To: %d Jumped To: %d\n", cpu->sp, called_from, return_to, jumped_to);
 	if (cpu->sp >= STACK_SIZE - 17){
 		cpu->err = ERR_STACK_OVERFLOW;
@@ -35,12 +35,12 @@ int32_t stack_push(systemcpu *cpu, int32_t called_from, int32_t return_to, int32
 	cpu->mem->stack[cpu->sp] = *newFrame;
 	systemmemory *bah = cpu->mem;
 	stackframe bah2 = cpu->mem->stack[cpu->sp];
-	int32_t bah3 = cpu->mem->stack[cpu->sp].null_frame;
+	uint32_t bah3 = cpu->mem->stack[cpu->sp].null_frame;
 	//printf("Topmost stackframe: Null: %d CF: %d RT: %d JT: %d\n", cpu->mem->stack[cpu->sp].null_frame, cpu->mem->stack[cpu->sp].called_from, cpu->mem->stack[cpu->sp].return_to, cpu->mem->stack[cpu->sp].jumped_to);
 	return cpu->sp;
 };
 
-int32_t stack_pop(systemcpu *cpu){
+uint32_t stack_pop(systemcpu *cpu){
 	//printf("POP: Stack pointer: %d\n", cpu->sp);
 	if (cpu->sp == 0){
 		cpu->err = ERR_POP_EMPTY_STACK;
@@ -59,7 +59,7 @@ int32_t stack_pop(systemcpu *cpu){
 	return cpu->sp;
 }
 
-instruction decode_instruction(int32_t raw_instruction){
+instruction decode_instruction(uint32_t raw_instruction){
 	instruction newInstruction;
 	newInstruction.opcode = extract_bits(raw_instruction, 8, 1);
 	newInstruction.payload_len = extract_bits(raw_instruction, 8, 9);
@@ -71,7 +71,7 @@ instruction decode_instruction(int32_t raw_instruction){
 
 void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 	//printf("My pointer - start of opcode_dispatcher: %p\n", cpu);
-	int32_t payload[currentInstruction.payload_len];
+	uint32_t payload[currentInstruction.payload_len];
 	if (currentInstruction.payload_len > 0){
 		for (int i=0; i < currentInstruction.payload_len; i++){
 			payload[i] = cpu->mem->memory[cpu->ip + 1];
@@ -122,7 +122,7 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 void cpu_tick(systemcpu *cpu){
 	//printf("Tick started. SP: %d IP: %d\n", cpu->sp, cpu->ip);
 	cpu->tick++;
-	int32_t next_instruction_raw = cpu->mem->memory[cpu->ip];
+	uint32_t next_instruction_raw = cpu->mem->memory[cpu->ip];
 	instruction next_instruction = decode_instruction(next_instruction_raw);
 	opcode_dispatcher(next_instruction, cpu);
 	//printf("Tick finished. SP: %d IP: %d\n", cpu->sp, cpu->ip); 
