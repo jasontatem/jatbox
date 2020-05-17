@@ -41,7 +41,7 @@ uint32_t stack_push(systemcpu *cpu, uint32_t called_from, uint32_t return_to, ui
 };
 
 uint32_t stack_pop(systemcpu *cpu){
-	printf("POP: Stack pointer: %d\n", cpu->sp);
+	//printf("POP: Stack pointer: %d\n", cpu->sp);
 	if (cpu->sp == 0){
 		cpu->err = ERR_POP_EMPTY_STACK;
 		return -1;
@@ -124,6 +124,12 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 			break;
 		case 14: // Unpack8
 			cpu->status = opcode_14_unpack8(currentInstruction, cpu, payload);
+			break;
+		case 15: // Pack16
+			cpu->status = opcode_15_pack16(currentInstruction, cpu, payload);
+			break;
+		case 16: // Unpack16
+			cpu->status = opcode_16_unpack16(currentInstruction, cpu, payload);
 			break;
 		default:
 			cpu->err = ERR_INVALID_OPCODE;

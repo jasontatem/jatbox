@@ -212,8 +212,8 @@ uint32_t opcode_13_pack8(instruction currentInstruction, systemcpu *cpu, uint32_
 	result += (b << 8);
 	result += (c << 16);
 	result += (d << 24);
-	printf("Packing 8bit vals %d %d %d %d, result %d\n", payload[0], payload[1], payload[2], payload[3], result);
-	cpu->mem->memory[payload[4]] = result;
+	//printf("Packing 8bit vals %d %d %d %d, result %d\n", a, b, c, d, result);
+	cpu->mem->memory[destination] = result;
 	return 0;
 }
 
@@ -232,11 +232,56 @@ uint32_t opcode_14_unpack8(instruction currentInstruction, systemcpu *cpu, uint3
 	uint32_t b = extract_bits(source, 8, 9);
 	uint32_t c = extract_bits(source, 8, 17);
 	uint32_t d = extract_bits(source, 8, 25);
-	printf("Unpacked 8bit vals %d %d %d %d from %d\n", a, b, c, d, source);
+	//printf("Unpacked 8bit vals %d %d %d %d from %d\n", a, b, c, d, source);
 	cpu->mem->memory[destination] = a;
 	cpu->mem->memory[destination + 1] = b;
 	cpu->mem->memory[destination + 2] = c;
 	cpu->mem->memory[destination + 3] = d;
+	return 0;
+}
+
+uint32_t opcode_15_pack16(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]){
+	// arg1 determines whether the source vals are mem locations or explicit values
+	// - 0: mem location
+	// - non-zero: explicit value
+	uint32_t result = 0;
+	uint32_t a;
+	uint32_t b;
+	if (currentInstruction.arg1 == 0){
+		a = cpu->mem->memory[payload[0]];
+		b = cpu->mem->memory[payload[1]];
+	} else {
+		a = payload[0];
+		b = payload[1];
+	}
+	uint32_t destination = payload[2];
+	if (a > 65535 || b > 65535 ){
+		cpu->err = ERR_INVALID_DATA;
+		return CPU_STATUS_ERR;
+	}
+	result += a;
+	result += (b << 16);
+	//printf("Packing 16bit vals %d %d, result %d\n", a, b, result);
+	cpu->mem->memory[destination] = result;
+	return 0;
+}
+
+uint32_t opcode_16_unpack16(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]){
+	// arg1 determines whether the source is a mem location or explicit vlaue
+	// - 0: mem location
+	// - non-zero: explicit value
+	uint32_t source;
+	if (currentInstruction.arg1 == 0){
+		source = cpu->mem->memory[payload[0]];
+	} else {
+		source = payload[0];
+	}
+	uint32_t destination = payload[1];
+	uint32_t a = extract_bits(source, 16, 1);
+	uint32_t b = extract_bits(source, 16, 17);
+	//printf("Unpacked 16bit vals %d %d from %d\n", a, b, source);
+	cpu->mem->memory[destination] = a;
+	cpu->mem->memory[destination + 1] = b;
 	return 0;
 }
 

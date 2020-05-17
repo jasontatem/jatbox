@@ -25,6 +25,8 @@ uint32_t opcode_11_div(instruction currentInstruction, systemcpu *cpu, uint32_t 
 uint32_t opcode_12_sub(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
 uint32_t opcode_13_pack8(instruction currentInstruction, systemcpu *cpu, uint32_t payload[5]);
 uint32_t opcode_14_unpack8(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]);
+uint32_t opcode_15_pack16(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
+uint32_t opcode_16_unpack16(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]);
 
 
 
