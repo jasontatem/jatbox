@@ -1,5 +1,9 @@
 label_define = '::'
 label_ref = '``'
+def_prefix = 'def'
+def_ref_prefix = '$'
+hex_prefix = '0x'
+bin_prefix = '%'
 
 class Opcode(object):
     def __init__(self, op_name, op_number, length_condition, arg1_condition, arg2_condition):
@@ -62,9 +66,11 @@ class Instruction(object):
         except:
             raise Exception('Instruction name {} not found in opcode list'.format(self.op_name))
         self.op_number = opcode.op_number
-        self.length = int(segments[1])
-        self.arg1 = int(segments[2])
-        self.arg2 = int(segments[3])
+        self.length = int_read(segments[1])
+        self.arg1 = int_read(segments[2])
+        self.arg2 = int_read(segments[3])
+        if self.length > 255 or self.arg1 > 255 or self.arg2 > 255:
+            raise Exception('Length or args are > 255. Length:{} Arg1:{} Arg2:{}'.format(self.length, self.arg1, self.arg2))
         if self.length > 0:
             self.payload = list()
             for n in segments[4:self.length + 4]:
@@ -77,7 +83,7 @@ class Instruction(object):
                     lr = LabelReference(label)
                     self.payload.append(lr)
                 else:
-                    self.payload.append(int(n))
+                    self.payload.append(int_read(n))
         if opcode.validate(self):
             pass
         else:
@@ -106,10 +112,22 @@ class LabelReference(object):
         self.label = label
 
 
+class Define(object):
+    def __init__(self, name, value):
+        self.name = name
+        self.value = int_read(value)
+
+
+class DefineReference(object):
+    def __init__(self, define):
+        self.define = define
+
+
 class Program(object):
     def __init__(self):
         self.program = list()
         self.labels = list()
+        self.defs = list()
 
     def resolve_labels(self):
         position = 1000000
@@ -144,6 +162,9 @@ def read_asm(file_name):
         lines = [l.split('#')[0] for l in data.split('\n')]
         # find all labels pass
         prog.labels = [Label(line.split(label_define)[1].rstrip()) for line in lines if line.startswith(label_define)]
+        # find all defs pass
+        prog.defs = [Define(line.split(def_prefix)[1].rstrip().split()[0], line.split(def_prefix)[1].rstrip().split()[1]) for line in lines if line.startswith(def_prefix)]
+        # scan through, create series of labels and instructions
         for line in lines:
             if line.startswith(label_define):
                 l = [label for label in prog.labels if label.name == line.split(label_define)[1].rstrip()][0]
@@ -156,6 +177,21 @@ def read_asm(file_name):
 def write_bin(file_name, instructions):
     with open(file_name, 'wb') as f:
         f.write(b''.join([i.out() for i in instructions]))
+
+
+def int_read(int_str):
+    if int_str.startswith(hex_prefix):
+        return int(int_str, 0)
+    else if int_str.startswith(bin_prefix):
+        return int(int_str, 2)
+    else if int_str.startswith(def_ref_prefix):
+        try:
+            my_def = [d for d in prog.defs if d.name == int_str.split(def_ref_prefix[1])][0]
+        except:
+            raise Exception('Define {} not found'.format(int_str))
+    else:
+        return int(int_str)
+
 
 if __name__=='__main__':
     import argparse
