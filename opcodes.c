@@ -184,11 +184,25 @@ uint32_t opcode_12_sub(instruction currentInstruction, systemcpu *cpu, uint32_t 
 }
 
 uint32_t opcode_13_pack8(instruction currentInstruction, systemcpu *cpu, uint32_t payload[5]){
+	// arg1 determines whether the source vals are mem locations or explicit values
+	// - 0: mem location
+	// - non-zero: explicit value
 	uint32_t result = 0;
-	uint32_t a = payload[0];
-	uint32_t b = payload[1];
-	uint32_t c = payload[2];
-	uint32_t d = payload[3];
+	uint32_t a;
+	uint32_t b;
+	uint32_t c;
+	uint32_t d;
+	if (currentInstruction.arg1 == 0){
+		a = cpu->mem->memory[payload[0]];
+		b = cpu->mem->memory[payload[1]];
+		c = cpu->mem->memory[payload[2]];
+		d = cpu->mem->memory[payload[3]];
+	} else {
+		a = payload[0];
+		b = payload[1];
+		c = payload[2];
+		d = payload[3];
+	}
 	uint32_t destination = payload[4];
 	if (a > 255 || b > 255 || c > 255 || d > 255){
 		cpu->err = ERR_INVALID_DATA;
@@ -200,6 +214,29 @@ uint32_t opcode_13_pack8(instruction currentInstruction, systemcpu *cpu, uint32_
 	result += (d << 24);
 	printf("Packing 8bit vals %d %d %d %d, result %d\n", payload[0], payload[1], payload[2], payload[3], result);
 	cpu->mem->memory[payload[4]] = result;
+	return 0;
+}
+
+uint32_t opcode_14_unpack8(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]){
+	// arg1 determines whether the source is a mem location or explicit vlaue
+	// - 0: mem location
+	// - non-zero: explicit value
+	uint32_t source;
+	if (currentInstruction.arg1 == 0){
+		source = cpu->mem->memory[payload[0]];
+	} else {
+		source = payload[0];
+	}
+	uint32_t destination = payload[1];
+	uint32_t a = extract_bits(source, 8, 1);
+	uint32_t b = extract_bits(source, 8, 9);
+	uint32_t c = extract_bits(source, 8, 17);
+	uint32_t d = extract_bits(source, 8, 25);
+	printf("Unpacked 8bit vals %d %d %d %d from %d\n", a, b, c, d, source);
+	cpu->mem->memory[destination] = a;
+	cpu->mem->memory[destination + 1] = b;
+	cpu->mem->memory[destination + 2] = c;
+	cpu->mem->memory[destination + 3] = d;
 	return 0;
 }
 

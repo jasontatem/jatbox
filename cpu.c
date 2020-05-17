@@ -122,6 +122,9 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 		case 13: // Pack8
 			cpu->status = opcode_13_pack8(currentInstruction, cpu, payload);
 			break;
+		case 14: // Unpack8
+			cpu->status = opcode_14_unpack8(currentInstruction, cpu, payload);
+			break;
 		default:
 			cpu->err = ERR_INVALID_OPCODE;
 	}

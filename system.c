@@ -28,6 +28,33 @@ void load_bin(char* filename, systemarch *system){
 	fclose(myfile);
 }
 
+char *cpu_stop_reason(cpu_status){
+	if (cpu_status == CPU_STATUS_HALT){
+		return "CPU Halted";
+	} else if (cpu_status == CPU_STATUS_ERR){
+		return "CPU Error";
+	} else {
+		return "Unknown status, check defines in cpu.h (or this is a bug)";
+	}
+}
+
+char *cpu_err_reason(cpu_err){
+	if (cpu_err == ERR_STACK_OVERFLOW){
+		return "Stack overflow";
+	} else if (cpu_err == ERR_INVALID_DATA){
+		return "Invalid data";
+	} else if (cpu_err == ERR_INVALID_OPCODE){
+		return "Invalid opcode";
+	} else if (cpu_err == ERR_POP_EMPTY_STACK){
+		return "Attempted to pop empty stack";
+	} else if (cpu_err == ERR_POP_NULL_FRAME){
+		return "Null frame encountered during stack pop";
+	}
+	else {
+		return "Unknown error, check defines in cpu.h (or this is a bug)";
+	}
+}
+
 int main(void){
 	printf("Starting...\n");
 	systemarch *system0 = malloc(sizeof(systemarch));
@@ -56,12 +83,12 @@ int main(void){
 	while(system0->cpu->status == 0){
 		system_tick(system0);
 			if(system0->cpu->err != 0){
-				printf("CPU error encountered: %d\n", system0->cpu->err);
+				printf("CPU error encountered: %d, %s\n", system0->cpu->err, cpu_err_reason(system0->cpu->err));
 				system0->cpu->status = CPU_STATUS_ERR;
 				break;
 			}
 		//printf("Tick: %d\n", system0.cpu->tick);
 	}
-	printf("CPU reported non-zero status: %d\n", system0->cpu->status);
+	printf("CPU reported non-zero status: %d, %s\n", system0->cpu->status, cpu_stop_reason(system0->cpu->status));
 	return 0;
 }

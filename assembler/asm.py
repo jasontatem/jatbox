@@ -46,7 +46,8 @@ opcodes = [
     Opcode('mult', 10, lambda x:x == 3, None, None),
     Opcode('div', 11, lambda x:x == 3, None, None),
     Opcode('sub', 12, lambda x:x == 3, None, None),
-    Opcode('pack8', 13, lambda x:x == 5, None, None)
+    Opcode('pack8', 13, lambda x:x == 5, None, None),
+    Opcode('unpack8', 14, lambda x:x == 2, None, None)
 ]
 
 
