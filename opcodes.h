@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdint.h>
 #ifndef MEMORY_H
 #define MEMORY_H
 #include "memory.h"
@@ -22,6 +23,7 @@ uint32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, uint32_
 uint32_t opcode_10_mult(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
 uint32_t opcode_11_div(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
 uint32_t opcode_12_sub(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
+uint32_t opcode_13_pack8(instruction currentInstruction, systemcpu *cpu, uint32_t payload[5]);
 
 
 

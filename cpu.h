@@ -42,6 +42,7 @@ void cpu_tick(systemcpu *cpu);
 #define ERR_POP_EMPTY_STACK 2
 #define ERR_POP_NULL_FRAME 3
 #define ERR_INVALID_OPCODE 4
+#define ERR_INVALID_DATA 5
 
 // Status Codes
 #define CPU_STATUS_HALT 1

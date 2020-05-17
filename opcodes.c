@@ -183,3 +183,23 @@ uint32_t opcode_12_sub(instruction currentInstruction, systemcpu *cpu, uint32_t 
 	return 0;
 }
 
+uint32_t opcode_13_pack8(instruction currentInstruction, systemcpu *cpu, uint32_t payload[5]){
+	uint32_t result = 0;
+	uint32_t a = payload[0];
+	uint32_t b = payload[1];
+	uint32_t c = payload[2];
+	uint32_t d = payload[3];
+	uint32_t destination = payload[4];
+	if (a > 255 || b > 255 || c > 255 || d > 255){
+		cpu->err = ERR_INVALID_DATA;
+		return CPU_STATUS_ERR;
+	}
+	result += a;
+	result += (b << 8);
+	result += (c << 16);
+	result += (d << 24);
+	printf("Packing 8bit vals %d %d %d %d, result %d\n", payload[0], payload[1], payload[2], payload[3], result);
+	cpu->mem->memory[payload[4]] = result;
+	return 0;
+}
+
