@@ -90,6 +90,7 @@ class Instruction(object):
             raise Exception('Instruction did not pass validation for {}'.format(self.op_name))
 
     def out(self):
+        print('Outputting binary for op {} len {} arg1 {} arg2 {} payload {}'.format(self.op_number, self.length, self.arg1, self.arg2, self.payload))
         instruction_int = self.op_number
         instruction_int += self.length * 2 ** 8
         instruction_int += self.arg1 * 2 ** 16
@@ -169,6 +170,8 @@ def read_asm(file_name):
             if line.startswith(label_define):
                 l = [label for label in prog.labels if label.name == line.split(label_define)[1].rstrip()][0]
                 prog.program.append(l)
+            elif line.startswith(def_prefix):
+                pass
             else:
                 i = Instruction(line)
                 prog.program.append(i)
@@ -182,11 +185,12 @@ def write_bin(file_name, instructions):
 def int_read(int_str):
     if int_str.startswith(hex_prefix):
         return int(int_str, 0)
-    else if int_str.startswith(bin_prefix):
-        return int(int_str, 2)
-    else if int_str.startswith(def_ref_prefix):
+    elif int_str.startswith(bin_prefix):
+        return int(int_str.split(bin_prefix)[1], 2)
+    elif int_str.startswith(def_ref_prefix):
         try:
-            my_def = [d for d in prog.defs if d.name == int_str.split(def_ref_prefix[1])][0]
+            my_def = [d for d in prog.defs if d.name == int_str.split(def_ref_prefix)[1]][0]
+            return my_def.value
         except:
             raise Exception('Define {} not found'.format(int_str))
     else:
