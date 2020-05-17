@@ -22,7 +22,7 @@ uint32_t cpu_init(systemcpu *cpu){
 
 uint32_t stack_push(systemcpu *cpu, uint32_t called_from, uint32_t return_to, uint32_t jumped_to){
 	//printf("PUSH: Stack Pointer: %d Called From: %d Return To: %d Jumped To: %d\n", cpu->sp, called_from, return_to, jumped_to);
-	if (cpu->sp >= STACK_SIZE - 17){
+	if (cpu->sp >= STACK_SIZE){
 		cpu->err = ERR_STACK_OVERFLOW;
 		return -1;
 	}
@@ -41,7 +41,7 @@ uint32_t stack_push(systemcpu *cpu, uint32_t called_from, uint32_t return_to, ui
 };
 
 uint32_t stack_pop(systemcpu *cpu){
-	//printf("POP: Stack pointer: %d\n", cpu->sp);
+	printf("POP: Stack pointer: %d\n", cpu->sp);
 	if (cpu->sp == 0){
 		cpu->err = ERR_POP_EMPTY_STACK;
 		return -1;
