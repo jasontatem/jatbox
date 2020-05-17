@@ -139,6 +139,7 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 
 void cpu_tick(systemcpu *cpu){
 	//printf("Tick started. SP: %d IP: %d\n", cpu->sp, cpu->ip);
+	//printf("Valwatch: %d %d %d\n", cpu->mem->memory[999007], cpu->mem->memory[999008], cpu->mem->memory[999000]);
 	cpu->tick++;
 	uint32_t next_instruction_raw = cpu->mem->memory[cpu->ip];
 	instruction next_instruction = decode_instruction(next_instruction_raw);
