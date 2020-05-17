@@ -4,6 +4,7 @@ def_prefix = 'def'
 def_ref_prefix = '$'
 hex_prefix = '0x'
 bin_prefix = '%'
+str_prefix = '&'
 data_prefix = '='
 
 class Opcode(object):
@@ -135,13 +136,14 @@ class Data(object):
 
 
 class Program(object):
-    def __init__(self):
+    def __init__(self, start_address=1000000):
         self.program = list()
         self.labels = list()
         self.defs = list()
+        self.start_addres = start_address
 
     def resolve_labels(self):
-        position = 1000000
+        position = self.start_addres
         # Pass 1 - set values of all labels
         for step in self.program:
             if isinstance(step, Label):
@@ -185,8 +187,29 @@ def read_asm(data):
         elif line.startswith(def_prefix):
             pass
         elif line.startswith(data_prefix):
-            d = Data(int_read(line.split(data_prefix)[1].rstrip()))
-            prog.program.append(d)
+            data_part = line.split(data_prefix, 1)[1]
+            if data_part.startswith(str_prefix):
+                str_data = data_part.split(str_prefix, 1)[1]
+                i = 0
+                while i < len(str_data):
+                    c = str_data[i]
+                    if c == '~':
+                        nc = str_data[i+1]
+                        if nc == 't':
+                            d = Data(ord('\t'))
+                        elif nc == 'n':
+                            d = Data(ord('\n'))
+                        else:
+                            d = Data(ord(nc))
+                        prog.program.append(d)
+                        i += 2
+                    else:
+                        d = Data(ord(c))
+                        prog.program.append(d)
+                        i += 1
+            else:
+                d = Data(int_read(line.split(data_prefix)[1].rstrip()))
+                prog.program.append(d)
         else:
             i = Instruction(line)
             prog.program.append(i)
