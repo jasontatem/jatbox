@@ -4,6 +4,7 @@ def_prefix = 'def'
 def_ref_prefix = '$'
 hex_prefix = '0x'
 bin_prefix = '%'
+data_prefix = '='
 
 class Opcode(object):
     def __init__(self, op_name, op_number, length_condition, arg1_condition, arg2_condition):
@@ -124,6 +125,15 @@ class DefineReference(object):
         self.define = define
 
 
+class Data(object):
+    def __init__(self, value):
+        self.value = value
+    
+    def out(self):
+        print('Outputting binary for data {}'.format(self.value))
+        return self.value.to_bytes(4, byteorder='little')
+
+
 class Program(object):
     def __init__(self):
         self.program = list()
@@ -137,8 +147,12 @@ class Program(object):
             if isinstance(step, Label):
                 print('Label {} has value {}'.format(step.name, position))
                 step.value = position
-            else:
+            elif isinstance(step, Instruction):
                 position += step.length + 1
+            elif isinstance(step, Data):
+                position += 1
+            else:
+                raise Exception('Unknown item in program: {}'.format(step))
         # Pass 2 - update references
         for step in self.program:
             if isinstance(step, Instruction):
@@ -150,7 +164,7 @@ class Program(object):
 
 
     def out(self):
-        inst = [i for i in self.program if isinstance(i, Instruction)]
+        inst = [i for i in self.program if isinstance(i, Instruction) or isinstance(i, Data)]
         return inst
 
     
@@ -170,6 +184,9 @@ def read_asm(data):
             prog.program.append(l)
         elif line.startswith(def_prefix):
             pass
+        elif line.startswith(data_prefix):
+            d = Data(int_read(line.split(data_prefix)[1].rstrip()))
+            prog.program.append(d)
         else:
             i = Instruction(line)
             prog.program.append(i)
