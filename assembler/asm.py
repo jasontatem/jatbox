@@ -90,7 +90,7 @@ class Instruction(object):
             raise Exception('Instruction did not pass validation for {}'.format(self.op_name))
 
     def out(self):
-        print('Outputting binary for op {} len {} arg1 {} arg2 {} payload {}'.format(self.op_number, self.length, self.arg1, self.arg2, self.payload))
+        print('Outputting binary for op {} ({}) len {} arg1 {} arg2 {} payload {}'.format(self.op_number, self.op_name, self.length, self.arg1, self.arg2, self.payload))
         instruction_int = self.op_number
         instruction_int += self.length * 2 ** 8
         instruction_int += self.arg1 * 2 ** 16
@@ -157,24 +157,22 @@ class Program(object):
 
 
 
-def read_asm(file_name):
-    with open(file_name, 'r') as f:
-        data = f.read()
-        lines = [l.split('#')[0] for l in data.split('\n')]
-        # find all labels pass
-        prog.labels = [Label(line.split(label_define)[1].rstrip()) for line in lines if line.startswith(label_define)]
-        # find all defs pass
-        prog.defs = [Define(line.split(def_prefix)[1].rstrip().split()[0], line.split(def_prefix)[1].rstrip().split()[1]) for line in lines if line.startswith(def_prefix)]
-        # scan through, create series of labels and instructions
-        for line in lines:
-            if line.startswith(label_define):
-                l = [label for label in prog.labels if label.name == line.split(label_define)[1].rstrip()][0]
-                prog.program.append(l)
-            elif line.startswith(def_prefix):
-                pass
-            else:
-                i = Instruction(line)
-                prog.program.append(i)
+def read_asm(data):
+    lines = [l.split('#')[0] for l in data.split('\n') if l != '' and l.split('#')[0] != '']
+    # find all labels pass
+    prog.labels = [Label(line.split(label_define)[1].rstrip()) for line in lines if line.startswith(label_define)]
+    # find all defs pass
+    prog.defs = [Define(line.split(def_prefix)[1].rstrip().split()[0], line.split(def_prefix)[1].rstrip().split()[1]) for line in lines if line.startswith(def_prefix)]
+    # scan through, create series of labels and instructions
+    for line in lines:
+        if line.startswith(label_define):
+            l = [label for label in prog.labels if label.name == line.split(label_define)[1].rstrip()][0]
+            prog.program.append(l)
+        elif line.startswith(def_prefix):
+            pass
+        else:
+            i = Instruction(line)
+            prog.program.append(i)
 
 
 def write_bin(file_name, instructions):
@@ -202,11 +200,20 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', default='./test.asm')
     parser.add_argument('-o', default='../test.bin')
+    parser.add_argument('-d', default='./std_defs.asm')
     args = parser.parse_args()
     #inst = read_asm(args.i)
     #write_bin(args.o, inst)
     prog = Program()
-    read_asm(args.i)
+
+    
+    with open(args.d, 'r') as f:
+        asm = f.read()
+    
+    with open(args.i, 'r') as f:
+        asm += f.read()
+
+    read_asm(asm)
     prog.resolve_labels()
     inst = prog.out()
     write_bin(args.o, inst)
