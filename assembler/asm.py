@@ -168,7 +168,6 @@ class Program(object):
                             print('Found ref to label {}'.format(step.payload[i].label.name))
                             step.payload[i] = step.payload[i].label.value
 
-
     def out(self):
         inst = [i for i in self.program if isinstance(i, Instruction) or isinstance(i, Data)]
         return inst
