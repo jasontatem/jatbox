@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "systemarch.h"
 
-void load_bin(char* filename, systemarch *system, uint32_t start_loc){
+int load_bin(char* filename, systemarch *system, uint32_t start_loc){
 	//printf("Mem pointers: %p %p\n", system->memory, system->memory->memory);
 	//printf("1\n");
 	FILE *myfile;
@@ -26,6 +26,7 @@ void load_bin(char* filename, systemarch *system, uint32_t start_loc){
 		i++;
 	}
 	fclose(myfile);
+	return i - start_loc;
 }
 
 char *cpu_stop_reason(cpu_status){
@@ -75,10 +76,12 @@ int main(void){
 	printf("Initial mem pointer (system0.cpu->mem->stack): %p\n", system0->cpu->mem->stack);
 	
 	printf("Loading bios.bin...\n");
-	load_bin("bios.bin", system0, 500000);
+	int bios_size = load_bin("bios.bin", system0, 500000);
+	printf("Loaded %d mem locations\n", bios_size);
 
 	printf("Loading test.bin...\n");
-	load_bin("test.bin", system0, 1000000);
+	int prog_size = load_bin("test.bin", system0, 1000000);
+	printf("Loaded %d mem locations\n", prog_size);
 
 	printf("Starting CPU...\n");
 

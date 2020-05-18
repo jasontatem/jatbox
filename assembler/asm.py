@@ -178,7 +178,7 @@ class Program(object):
 
 
 def read_asm(data):
-    lines = [l.split('#')[0] for l in data.split('\n') if l != '' and l.split('#')[0] != '']
+    lines = [l.lstrip().split('#')[0] for l in data.split('\n') if l != '' and l.split('#')[0] != '']
     # find all labels pass
     prog.labels = [Label(line.split(label_define)[1].rstrip()) for line in lines if line.startswith(label_define)]
     # find all defs pass
