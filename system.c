@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include "systemarch.h"
 
-void load_bin(char* filename, systemarch *system){
+void load_bin(char* filename, systemarch *system, uint32_t start_loc){
 	//printf("Mem pointers: %p %p\n", system->memory, system->memory->memory);
 	//printf("1\n");
 	FILE *myfile;
 	myfile = fopen(filename, "rb");
-	uint32_t i=INITIAL_IP;
+	uint32_t i=start_loc;
 	uint32_t temp;
 	//printf("2\n");
 	while(1){
@@ -74,10 +74,13 @@ int main(void){
 	printf("Initial mem pointer (system0.cpu->mem->memory): %p\n", system0->cpu->mem->memory);
 	printf("Initial mem pointer (system0.cpu->mem->stack): %p\n", system0->cpu->mem->stack);
 	
-	printf("Loading test.bin...\n");
-	load_bin("test.bin", system0);
-	printf("Starting CPU...\n");
+	printf("Loading bios.bin...\n");
+	load_bin("bios.bin", system0, 500000);
 
+	printf("Loading test.bin...\n");
+	load_bin("test.bin", system0, 1000000);
+
+	printf("Starting CPU...\n");
 
 	system0->cpu->ip = INITIAL_IP;
 	while(system0->cpu->status == 0){

@@ -245,10 +245,11 @@ if __name__=='__main__':
     parser.add_argument('-i', default='./test.asm')
     parser.add_argument('-o', default='../test.bin')
     parser.add_argument('-d', default='./std_defs.asm')
+    parser.add_argument('-s', default=1000000)
     args = parser.parse_args()
     #inst = read_asm(args.i)
     #write_bin(args.o, inst)
-    prog = Program()
+    prog = Program(start_address=int(args.s))
 
     
     with open(args.d, 'r') as f:

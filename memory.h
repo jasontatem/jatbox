@@ -7,7 +7,7 @@
 #define IO_RANGE_HI 499999
 #define BIOS_RANGE_LOW 500000
 #define BIOS_RANGE_HI 999999
-#define INITIAL_IP 1000000
+#define INITIAL_IP 500000
 
 
 typedef struct StackFrame {
