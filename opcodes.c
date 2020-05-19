@@ -299,3 +299,9 @@ uint32_t opcode_16_unpack16(instruction currentInstruction, systemcpu *cpu, uint
 	return 0;
 }
 
+uint32_t opcode_17_clear(instruction currentInstruction, systemcpu *cpu){
+	// Clears Status and Result registers on cpu. Status cleared by return
+	cpu->result = 0;
+	return 0;
+}
+

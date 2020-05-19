@@ -49,7 +49,8 @@ opcodes = [
     Opcode('pack8', 13, lambda x:x == 5, None, None),
     Opcode('unpack8', 14, lambda x:x == 2, None, None),
     Opcode('pack16', 15, lambda x:x == 3, None, None),
-    Opcode('unpack16', 16, lambda x:x == 2, None, None)
+    Opcode('unpack16', 16, lambda x:x == 2, None, None),
+    Opcode('clear', 17, None, None, None)
 ]
 
 
