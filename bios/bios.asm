@@ -8,15 +8,29 @@
 # - The range $BIOS_MEM_LO - $BIOS_MEM_HI is reserved for BIOS working memory. The range is small (989 32bit values) but BIOS functions are intended to be simple
 # - BIOS functions should not write to locations outside of the working memory, except for MMIO addresses
 # - BIOS functions are not required to clean up after themselves in BIOS working memory. Functions should take care of any initializations they require.
+# - BIOS functions can call other BIOS functions but this requires knowledge of what portions of mem are used by each function involved
+#
+#
+#
+::BIOS_START
+# Here we jump to the init, and provide a fixed point for jumping to the BIOS function dispatcher
+goto 1 0 0 ``BIOS_INIT
+goto 1 0 0 ``BIOS_DISPATCHER
 #
 #
 #
 ::BIOS_INIT
+# Startup stuff goes here, may get bigger / more complicated later
+store 2 0 0 0 $BIOS_ARG0
+store 2 0 0 ``BOOT_STR $BIOS_ARG1
+store 2 0 0 68 $BIOS_ARG2
+jump 2 0 0 $BIOS_DISPATCHER_ENTRY 0
 goto 1 0 0 $CPU_INITIAL_IP
 #
 #
 #
 ::BIOS_DISPATCHER
+# Dispatcher uses $BIOS_ARG0 to determine which function to call. Returns are set to the end of the function to prevent unnecessary compares
 compare 2 1 0 $BIOS_ARG0 0
 branch 3 1 0 3 ``BIOS_FUNC_0_PRINT_STR ``DISPATCHER_RETURN
 compare 2 1 0 $BIOS_ARG0 1
@@ -92,5 +106,10 @@ add 3 0 0 $BIOS_ARG1 $BIOS_ARG2 $BIOS_FUNC_1_TARGET
     goto 1 0 0 ``BIOS_FUNC_1_LOOP
 ::BIOS_FUNC_1_RETURN
 return 0 0 0
-
+#
+#
+#
+# Data Area - Strings and other useful bits for BIOS functions can go here
+::BOOT_STR
+=&JatBox BIOS v0.01~nSystem initialized. Starting user code execution.~n
 
