@@ -93,7 +93,7 @@ class Instruction(object):
         if opcode.validate(self):
             pass
         else:
-            raise Exception('Instruction did not pass validation for {}'.format(self.op_name))
+            raise Exception('Instruction did not pass validation for {}\nInstruction string: {}'.format(self.op_name, self.instruction_string))
 
     def out(self):
         print('Outputting binary for op {} ({}) len {} arg1 {} arg2 {} payload {}'.format(self.op_number, self.op_name, self.length, self.arg1, self.arg2, self.payload))
