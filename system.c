@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "systemarch.h"
+#include "log/log.h"
 
 int load_bin(char* filename, systemarch *system, uint32_t start_loc){
 	//printf("Mem pointers: %p %p\n", system->memory, system->memory->memory);
@@ -19,7 +20,7 @@ int load_bin(char* filename, systemarch *system, uint32_t start_loc){
 			break;
 		}
 		//printf("Mem pointers: %p %p\n", system->memory, system->memory->memory);
-		printf("%d Writing: %d\n", i, temp);
+		log_trace("%d Writing: %d", i, temp);
 		system->memory->memory[i] = temp;
 		//printf("Mem pointers: %p %p\n", system->memory, system->memory->memory);
 		//printf("%d Reading: %d\n", i, system->memory->memory[i]);
@@ -57,23 +58,28 @@ char *cpu_err_reason(cpu_err){
 }
 
 int main(void){
+	log_set_quiet(1);
+	FILE *logfile;
+	logfile = fopen("./jatbox.log", "w");
+	log_set_fp(logfile);
+
 	printf("Starting...\n");
 	systemarch *system0 = malloc(sizeof(systemarch));
 	printf("Calling system_init\n");
-	printf("System pointer before init: %p\n", system0);
+	log_trace("System pointer before init: %p", system0);
 	system_init(system0);
 	printf("Calling memory_init\n");
 	memory_init(system0->memory);
 	printf("Calling cpu_init\n");
 	cpu_init(system0->cpu);
 	
-	printf("System pointer after init: %p\n", system0);
-	printf("Initial cpu pointer: %p\n", system0->cpu);
-	printf("Initial mem pointer (system0.memory): %p\n", system0->memory);
-	printf("Initial mem pointer (system0.memory->memory): %p\n", system0->memory->memory);
-	printf("Initial mem pointer (system0.memory->stack): %p\n", system0->memory->stack);
-	printf("Initial mem pointer (system0.cpu->mem->memory): %p\n", system0->cpu->mem->memory);
-	printf("Initial mem pointer (system0.cpu->mem->stack): %p\n", system0->cpu->mem->stack);
+	log_trace("System pointer after init: %p", system0);
+	log_trace("Initial cpu pointer: %p", system0->cpu);
+	log_trace("Initial mem pointer (system0.memory): %p", system0->memory);
+	log_trace("Initial mem pointer (system0.memory->memory): %p", system0->memory->memory);
+	log_trace("Initial mem pointer (system0.memory->stack): %p", system0->memory->stack);
+	log_trace("Initial mem pointer (system0.cpu->mem->memory): %p", system0->cpu->mem->memory);
+	log_trace("Initial mem pointer (system0.cpu->mem->stack): %p", system0->cpu->mem->stack);
 	
 	printf("Loading bios.bin...\n");
 	int bios_size = load_bin("bios.bin", system0, 500000);
@@ -93,8 +99,8 @@ int main(void){
 				system0->cpu->status = CPU_STATUS_ERR;
 				break;
 			}
-		//printf("Tick: %d\n", system0.cpu->tick);
 	}
 	printf("CPU reported non-zero status: %d, %s\n", system0->cpu->status, cpu_stop_reason(system0->cpu->status));
+	fclose(logfile);
 	return 0;
 }

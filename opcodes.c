@@ -4,6 +4,7 @@
 #define CPU_H
 #include "cpu.h"
 #endif
+#include "log/log.h"
 
 #define COMPARE_RESULT_GT 1
 #define COMPARE_RESULT_LT 2
@@ -45,14 +46,14 @@ uint32_t opcode_3_add(instruction currentInstruction, systemcpu *cpu, uint32_t p
 	uint32_t a = payload[0];
 	uint32_t b = payload[1];
 	uint32_t destination = payload[2];
-	//printf("Add: arg1: %d a: %d b: %d destination: %d\n", currentInstruction.arg1, a, b, destination);
+	log_trace("Add: arg1: %d a: %d b: %d destination: %d", currentInstruction.arg1, a, b, destination);
 	if (currentInstruction.arg1 == 0){
-		//printf("Treating both as locations. Value at a: %d Value at b: %d\n", cpu->mem->memory[a], cpu->mem->memory[b]);
+		log_trace("Treating both as locations. Value at a: %d Value at b: %d", cpu->mem->memory[a], cpu->mem->memory[b]);
 		cpu->mem->memory[destination] = cpu->mem->memory[a] + cpu->mem->memory[b];
 	} else {
 		cpu->mem->memory[destination] = cpu->mem->memory[a] + b;
 	}
-	//printf("Add: value at destination: %d\n", cpu->mem->memory[destination]);
+	log_trace("Add: value at destination: %d", cpu->mem->memory[destination]);
 	return 0;
 }
 
@@ -89,7 +90,7 @@ uint32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, uint32
 	//instruction args determine if treated as explicit value or mem ref
 	// arg1/2 = 0: treat payload[0/1] as explicit value
 	// arg1/2 = non-zero: treat payload[0/1] as mem ref
-	//printf("Compare: arg1: %d arg2: %d p1: %d p2: %d\n", currentInstruction.arg1, currentInstruction.arg2, payload[0], payload[1]);
+	log_trace("Compare: arg1: %d arg2: %d p1: %d p2: %d", currentInstruction.arg1, currentInstruction.arg2, payload[0], payload[1]);
 	uint32_t a, b;
 	if (currentInstruction.arg1 == 0){
 		a = payload[0];
@@ -101,7 +102,7 @@ uint32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, uint32
 	} else {
 		b = cpu->mem->memory[payload[1]];
 	}
-	//printf("Comparing a: %d b: %d\n", a, b);
+	log_trace("Comparing a: %d b: %d", a, b);
 	if (a > b){
 		cpu->result = COMPARE_RESULT_GT;
 	}
@@ -120,13 +121,13 @@ uint32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, uint32_
 	// if payload[2] is non-zero, treat that as a custom return location
 	uint32_t compare_value = payload[0];
 	uint32_t jump_destination = payload[1];
-	//printf("Branch: compare_value: %d jump_destination: %d\n", compare_value, jump_destination);
+	log_trace("Branch: compare_value: %d jump_destination: %d", compare_value, jump_destination);
 	if (cpu->result == compare_value){
 		if (currentInstruction.arg1 == 0){
-			//printf("Branch taken, goto style\n");
+			log_trace("Branch taken, goto style");
 			cpu->ip = jump_destination - 1;
 		} else {
-			//printf("Branch taken, jump style\n");
+			log_trace("Branch taken, jump style");
 			int32_t return_to;
 			if (payload[2] == 0){
 				return_to = cpu->ip;
@@ -138,7 +139,7 @@ uint32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, uint32_
 		}
 		return 0;
 	}
-	//printf("Branch not taken\n");
+	log_trace("Branch not taken");
 	return 0;
 }
 
@@ -149,14 +150,14 @@ uint32_t opcode_10_mult(instruction currentInstruction, systemcpu *cpu, uint32_t
 	uint32_t a = payload[0];
 	uint32_t b = payload[1];
 	uint32_t destination = payload[2];
-	//printf("Mult: arg1: %d a: %d b: %d destination: %d\n", currentInstruction.arg1, a, b, destination);
+	log_trace("Mult: arg1: %d a: %d b: %d destination: %d", currentInstruction.arg1, a, b, destination);
 	if (currentInstruction.arg1 == 0){
-		//printf("Treating both as locations. Value at a: %d Value at b: %d\n", cpu->mem->memory[a], cpu->mem->memory[b]);
+		log_trace("Treating both as locations. Value at a: %d Value at b: %d", cpu->mem->memory[a], cpu->mem->memory[b]);
 		cpu->mem->memory[destination] = cpu->mem->memory[a] * cpu->mem->memory[b];
 	} else {
 		cpu->mem->memory[destination] = cpu->mem->memory[a] * b;
 	}
-	//printf("Mult: value at destination: %d\n", cpu->mem->memory[destination]);
+	log_trace("Mult: value at destination: %d", cpu->mem->memory[destination]);
 	return 0;
 }
 
@@ -167,14 +168,14 @@ uint32_t opcode_11_div(instruction currentInstruction, systemcpu *cpu, uint32_t 
 	uint32_t a = payload[0];
 	uint32_t b = payload[1];
 	uint32_t destination = payload[2];
-	//printf("Div: arg1: %d a: %d b: %d destination: %d\n", currentInstruction.arg1, a, b, destination);
+	log_trace("Div: arg1: %d a: %d b: %d destination: %d", currentInstruction.arg1, a, b, destination);
 	if (currentInstruction.arg1 == 0){
-		//printf("Treating both as locations. Value at a: %d Value at b: %d\n", cpu->mem->memory[a], cpu->mem->memory[b]);
+		log_trace("Treating both as locations. Value at a: %d Value at b: %d", cpu->mem->memory[a], cpu->mem->memory[b]);
 		cpu->mem->memory[destination] = cpu->mem->memory[a] / cpu->mem->memory[b];
 	} else {
 		cpu->mem->memory[destination] = cpu->mem->memory[a] / b;
 	}
-	//printf("Div: value at destination: %d\n", cpu->mem->memory[destination]);
+	log_trace("Div: value at destination: %d", cpu->mem->memory[destination]);
 	return 0;
 }
 
@@ -185,14 +186,14 @@ uint32_t opcode_12_sub(instruction currentInstruction, systemcpu *cpu, uint32_t 
 	uint32_t a = payload[0];
 	uint32_t b = payload[1];
 	uint32_t destination = payload[2];
-	//printf("Sub: arg1: %d a: %d b: %d destination: %d\n", currentInstruction.arg1, a, b, destination);
+	log_trace("Sub: arg1: %d a: %d b: %d destination: %d", currentInstruction.arg1, a, b, destination);
 	if (currentInstruction.arg1 == 0){
-		//printf("Treating both as locations. Value at a: %d Value at b: %d\n", cpu->mem->memory[a], cpu->mem->memory[b]);
+		log_trace("Treating both as locations. Value at a: %d Value at b: %d", cpu->mem->memory[a], cpu->mem->memory[b]);
 		cpu->mem->memory[destination] = cpu->mem->memory[a] - cpu->mem->memory[b];
 	} else {
 		cpu->mem->memory[destination] = cpu->mem->memory[a] - b;
 	}
-	//printf("Sub: value at destination: %d\n", cpu->mem->memory[destination]);
+	log_trace("Sub: value at destination: %d", cpu->mem->memory[destination]);
 	return 0;
 }
 
@@ -225,7 +226,7 @@ uint32_t opcode_13_pack8(instruction currentInstruction, systemcpu *cpu, uint32_
 	result += (b << 8);
 	result += (c << 16);
 	result += (d << 24);
-	//printf("Packing 8bit vals %d %d %d %d, result %d\n", a, b, c, d, result);
+	log_trace("Packing 8bit vals %d %d %d %d, result %d", a, b, c, d, result);
 	cpu->mem->memory[destination] = result;
 	return 0;
 }
@@ -245,7 +246,7 @@ uint32_t opcode_14_unpack8(instruction currentInstruction, systemcpu *cpu, uint3
 	uint32_t b = extract_bits(source, 8, 9);
 	uint32_t c = extract_bits(source, 8, 17);
 	uint32_t d = extract_bits(source, 8, 25);
-	//printf("Unpacked 8bit vals %d %d %d %d from %d\n", a, b, c, d, source);
+	log_trace("Unpacked 8bit vals %d %d %d %d from %d", a, b, c, d, source);
 	cpu->mem->memory[destination] = a;
 	cpu->mem->memory[destination + 1] = b;
 	cpu->mem->memory[destination + 2] = c;
@@ -274,7 +275,7 @@ uint32_t opcode_15_pack16(instruction currentInstruction, systemcpu *cpu, uint32
 	}
 	result += a;
 	result += (b << 16);
-	//printf("Packing 16bit vals %d %d, result %d\n", a, b, result);
+	log_trace("Packing 16bit vals %d %d, result %d", a, b, result);
 	cpu->mem->memory[destination] = result;
 	return 0;
 }
@@ -292,7 +293,7 @@ uint32_t opcode_16_unpack16(instruction currentInstruction, systemcpu *cpu, uint
 	uint32_t destination = payload[1];
 	uint32_t a = extract_bits(source, 16, 1);
 	uint32_t b = extract_bits(source, 16, 17);
-	//printf("Unpacked 16bit vals %d %d from %d\n", a, b, source);
+	log_trace("Unpacked 16bit vals %d %d from %d", a, b, source);
 	cpu->mem->memory[destination] = a;
 	cpu->mem->memory[destination + 1] = b;
 	return 0;

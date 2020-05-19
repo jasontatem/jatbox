@@ -10,19 +10,17 @@
 #include "log/log.h"
 
 uint32_t cpu_init(systemcpu *cpu){
-	//printf("CPU pointer at start of cpu_init: %p\n", cpu);
 	cpu->sp = 0;
 	cpu->ip = INITIAL_IP;
 	cpu->err = 0;
 	cpu->status = 0;
 	cpu->result = 0;
 	cpu->tick = 0;
-	//printf("CPU pointer at end of cpu_init: %p\n", cpu);
 	return 0;
 };
 
 uint32_t stack_push(systemcpu *cpu, uint32_t called_from, uint32_t return_to, uint32_t jumped_to){
-	//printf("PUSH: Stack Pointer: %d Called From: %d Return To: %d Jumped To: %d\n", cpu->sp, called_from, return_to, jumped_to);
+	log_trace("PUSH: Stack Pointer: %d Called From: %d Return To: %d Jumped To: %d", cpu->sp, called_from, return_to, jumped_to);
 	if (cpu->sp >= STACK_SIZE){
 		cpu->err = ERR_STACK_OVERFLOW;
 		return -1;
@@ -37,18 +35,18 @@ uint32_t stack_push(systemcpu *cpu, uint32_t called_from, uint32_t return_to, ui
 	systemmemory *bah = cpu->mem;
 	stackframe bah2 = cpu->mem->stack[cpu->sp];
 	uint32_t bah3 = cpu->mem->stack[cpu->sp].null_frame;
-	//printf("Topmost stackframe: Null: %d CF: %d RT: %d JT: %d\n", cpu->mem->stack[cpu->sp].null_frame, cpu->mem->stack[cpu->sp].called_from, cpu->mem->stack[cpu->sp].return_to, cpu->mem->stack[cpu->sp].jumped_to);
+	log_trace("Topmost stackframe: Null: %d CF: %d RT: %d JT: %d", cpu->mem->stack[cpu->sp].null_frame, cpu->mem->stack[cpu->sp].called_from, cpu->mem->stack[cpu->sp].return_to, cpu->mem->stack[cpu->sp].jumped_to);
 	return cpu->sp;
 };
 
 uint32_t stack_pop(systemcpu *cpu){
-	//printf("POP: Stack pointer: %d\n", cpu->sp);
+	log_trace("POP: Stack pointer: %d", cpu->sp);
 	if (cpu->sp == 0){
 		cpu->err = ERR_POP_EMPTY_STACK;
 		return -1;
 	}
 	stackframe poppedFrame = cpu->mem->stack[cpu->sp];
-	//printf("Popped stackframe: Null: %d CF: %d RT: %d JT: %d\n", poppedFrame.null_frame, poppedFrame.called_from, poppedFrame.return_to, poppedFrame.jumped_to);
+	log_trace("Popped stackframe: Null: %d CF: %d RT: %d JT: %d", poppedFrame.null_frame, poppedFrame.called_from, poppedFrame.return_to, poppedFrame.jumped_to);
 	if (poppedFrame.null_frame == 1){
 		cpu->err = ERR_POP_NULL_FRAME;
 		return -1;
@@ -66,12 +64,11 @@ instruction decode_instruction(uint32_t raw_instruction){
 	newInstruction.payload_len = extract_bits(raw_instruction, 8, 9);
 	newInstruction.arg1 = extract_bits(raw_instruction, 8, 17);
 	newInstruction.arg2 = extract_bits(raw_instruction, 8, 25);
-    //printf("Raw: %d  Opcode: %d  Len: %d  Arg1: %d  Arg2: %d\n", raw_instruction, newInstruction.opcode, newInstruction.payload_len, newInstruction.arg1, newInstruction.arg2);
+    log_trace("Raw: %d  Opcode: %d  Len: %d  Arg1: %d  Arg2: %d", raw_instruction, newInstruction.opcode, newInstruction.payload_len, newInstruction.arg1, newInstruction.arg2);
 	return newInstruction;
 }
 
 void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
-	//printf("My pointer - start of opcode_dispatcher: %p\n", cpu);
 	uint32_t payload[currentInstruction.payload_len];
 	if (currentInstruction.payload_len > 0){
 		for (int i=0; i < currentInstruction.payload_len; i++){
@@ -79,7 +76,6 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 			cpu->ip++;
 		}
 	} 
-	//printf("My pointer BEFORE opcode switch: %p\n", cpu);
 	switch(currentInstruction.opcode){
 		case 0: // No-Op
 			cpu->status = opcode_0_noop(currentInstruction, cpu);
@@ -139,11 +135,11 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 };
 
 void cpu_tick(systemcpu *cpu){
-	//printf("Tick started. SP: %d IP: %d\n", cpu->sp, cpu->ip);
-	//printf("Valwatch: %d %d %d\n", cpu->mem->memory[999007], cpu->mem->memory[999008], cpu->mem->memory[999000]);
+	log_trace("Tick started. SP: %d IP: %d", cpu->sp, cpu->ip);
+	//log_trace("Valwatch: %d %d %d\n", cpu->mem->memory[999007], cpu->mem->memory[999008], cpu->mem->memory[999000]);
 	cpu->tick++;
 	uint32_t next_instruction_raw = cpu->mem->memory[cpu->ip];
 	instruction next_instruction = decode_instruction(next_instruction_raw);
 	opcode_dispatcher(next_instruction, cpu);
-	//printf("Tick finished. SP: %d IP: %d\n", cpu->sp, cpu->ip); 
+	log_trace("Tick finished. SP: %d IP: %d", cpu->sp, cpu->ip); 
 }
