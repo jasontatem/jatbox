@@ -56,10 +56,16 @@ uint32_t opcode_3_add(instruction currentInstruction, systemcpu *cpu, uint32_t p
 	return 0;
 }
 
-uint32_t opcode_4_jump(instruction currentInstruction, systemcpu *cpu, uint32_t payload[1]){
+uint32_t opcode_4_jump(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]){
+	// If payload[1] is non-zero, we treat that as a custom return location rather than returning to the current IP
 	uint32_t jump_destination = payload[0];
-	uint32_t return_to = cpu->ip;
-	stack_push(cpu, return_to, return_to, jump_destination);
+	uint32_t return_to;
+	if (payload[1] == 0){
+		return_to = cpu->ip;
+	} else {
+		return_to = payload[1];
+	}
+	stack_push(cpu, cpu->ip, return_to, jump_destination);
 	cpu->ip = jump_destination - 1;
 	return 0;
 }
@@ -108,9 +114,10 @@ uint32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, uint32
 	return 0;
 }
 
-uint32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]){
+uint32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]){
 	// arg1 in instruction used to determine if we jump or goto
 	// 0 = goto, non-0 = jump w/ return
+	// if payload[2] is non-zero, treat that as a custom return location
 	uint32_t compare_value = payload[0];
 	uint32_t jump_destination = payload[1];
 	//printf("Branch: compare_value: %d jump_destination: %d\n", compare_value, jump_destination);
@@ -120,7 +127,13 @@ uint32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, uint32_
 			cpu->ip = jump_destination - 1;
 		} else {
 			//printf("Branch taken, jump style\n");
-			stack_push(cpu, cpu->ip, cpu->ip, jump_destination);
+			int32_t return_to;
+			if (payload[2] == 0){
+				return_to = cpu->ip;
+			} else {
+				return_to = payload[3]
+			}
+			stack_push(cpu, cpu->ip, return_to, jump_destination);
 			cpu->ip = jump_destination - 1;
 		}
 		return 0;
