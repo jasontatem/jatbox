@@ -7,6 +7,7 @@
 #endif
 #include "opcodes.h"
 #include "io.h"
+#include "log/log.h"
 
 uint32_t cpu_init(systemcpu *cpu){
 	//printf("CPU pointer at start of cpu_init: %p\n", cpu);
