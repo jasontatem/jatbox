@@ -30,7 +30,7 @@ uint32_t stack_push(systemcpu *cpu, uint32_t called_from, uint32_t return_to, ui
 	stackframe *newFrame = malloc(sizeof(stackframe));
 	newFrame->null_frame = 0;
 	newFrame->called_from = called_from;
-	newFrame->return_to = return_to;
+	newFrame->return_to = return_to - 1;
 	newFrame->jumped_to = jumped_to;
 	cpu->mem->stack[cpu->sp] = *newFrame;
 	systemmemory *bah = cpu->mem;

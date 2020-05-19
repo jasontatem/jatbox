@@ -131,7 +131,7 @@ uint32_t opcode_9_branch(instruction currentInstruction, systemcpu *cpu, uint32_
 			if (payload[2] == 0){
 				return_to = cpu->ip;
 			} else {
-				return_to = payload[3]
+				return_to = payload[2];
 			}
 			stack_push(cpu, cpu->ip, return_to, jump_destination);
 			cpu->ip = jump_destination - 1;
