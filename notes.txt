@@ -1,0 +1,29 @@
+Mem size: 16777216
+
+Known I/O stuff:
+- Serial console: 1 loc to write, 1 loc to read (for now)
+- Screen: 320x240 = 76800
+
+Dedicate first ~500K to I/O, second ~500K to BIOS?
+- 0-499999: I/O
+- 500000 - 999999: BIOS routines
+- 1000000: Initial IP
+
+
+BIOS routine calling convention:
+- Range 999980-999989: BIOS args 0-9
+- Range 999990-999999: BIOS outputs 0-9
+- Range 999000-999979: BIOS routine working mem 
+
+
+
+"print" subroutine:
+- input: start mem addr, length
+- output: dump a result to the status register, 0 for ok, non-zero for err
+- 1: set a counter to start_addr
+- 2: get value, add data_send flag, store in serial mem
+- 3: increment counter
+- 4: compare counter to length
+- 5: if counter > length, go to 2
+- 6: return
+
