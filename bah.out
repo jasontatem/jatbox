@@ -1,0 +1,814 @@
+execve("./test", ["./test"], 0x7fffdc0e4c70 /* 23 vars */) = 0
+brk(NULL)                               = 0x7fffd84c8000
+arch_prctl(0x3001 /* ARCH_??? */, 0x7fffe0053100) = -1 EINVAL (Invalid argument)
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=30656, ...}) = 0
+mmap(NULL, 30656, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f5c07af8000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
+pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0cBR\340\305\370\2609W\242\345)q\235A\1"..., 68, 880) = 68
+fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f5c07b30000
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
+pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0cBR\340\305\370\2609W\242\345)q\235A\1"..., 68, 880) = 68
+mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f5c07900000
+mprotect(0x7f5c07925000, 1847296, PROT_NONE) = 0
+mmap(0x7f5c07925000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f5c07925000
+mmap(0x7f5c07a9d000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f5c07a9d000
+mmap(0x7f5c07ae8000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f5c07ae8000
+mmap(0x7f5c07aee000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f5c07aee000
+close(3)                                = 0
+arch_prctl(ARCH_SET_FS, 0x7f5c07b31380) = 0
+mprotect(0x7f5c07ae8000, 12288, PROT_READ) = 0
+mprotect(0x7f5c07b3b000, 4096, PROT_READ) = 0
+mprotect(0x7f5c07b2d000, 4096, PROT_READ) = 0
+munmap(0x7f5c07af8000, 30656)           = 0
+brk(NULL)                               = 0x7fffd84c8000
+brk(0x7fffd84e9000)                     = 0x7fffd84e9000
+openat(AT_FDCWD, "./jatbox.log", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3
+ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+ioctl(0, SNDCTL_TMR_CONTINUE or TCSETSF, {B38400 opost isig -icanon -echo ...}) = 0
+ioctl(0, TCGETS, {B38400 opost isig -icanon -echo ...}) = 0
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0x3), ...}) = 0
+write(1, "Starting...\n", 12)           = 12
+write(1, "Calling system_init\n", 20)   = 20
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+openat(AT_FDCWD, "/etc/localtime", O_RDONLY|O_CLOEXEC) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+fstat(4, {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+read(4, "TZif2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\5\0\0\0\5\0\0\0\0"..., 4096) = 3536
+lseek(4, -2252, SEEK_CUR)               = 1284
+read(4, "TZif2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\5\0\0\0\5\0\0\0\0"..., 4096) = 2252
+close(4)                                = 0
+fstat(3, {st_mode=S_IFREG|0666, st_size=0, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 85) = 85
+mmap(NULL, 67112960, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f5c038f0000
+write(1, "Calling memory_init\n", 20)   = 20
+write(1, "Calling cpu_init\n", 17)      = 17
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 84) = 84
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 78) = 78
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 95) = 95
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 103) = 103
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 102) = 102
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 105) = 105
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 104) = 104
+write(1, "Loading bios.bin...\n", 20)   = 20
+openat(AT_FDCWD, "bios.bin", O_RDONLY)  = 4
+fstat(4, {st_mode=S_IFREG|0666, st_size=812, ...}) = 0
+read(4, "\6\1\0\0$\241\7\0\6\1\0\0002\241\7\0\1\2\0\0\0\0\0\0006B\17\0\1\2\0\0"..., 4096) = 812
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 66) = 66
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 67) = 67
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 67) = 67
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 67) = 67
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 67) = 67
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 67) = 67
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 67) = 67
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 64) = 64
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 67) = 67
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 65) = 65
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 60) = 60
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+read(4, "", 4096)                       = 0
+close(4)                                = 0
+write(1, "Loaded 203 mem locations\n", 25) = 25
+write(1, "Loading test.bin...\n", 20)   = 20
+openat(AT_FDCWD, "test.bin", O_RDONLY)  = 4
+fstat(4, {st_mode=S_IFREG|0666, st_size=140, ...}) = 0
+read(4, "\1\2\0\0\0\0\0\0006B\17\0\1\2\0\0YB\17\0007B\17\0\1\2\0\0\10\0\0\0"..., 4096) = 140
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 63) = 63
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 66) = 66
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 63) = 63
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 67) = 67
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 66) = 66
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 63) = 63
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 66) = 66
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 63) = 63
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 66) = 66
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 63) = 63
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 66) = 66
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 63) = 63
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 67) = 67
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 66) = 66
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 63) = 63
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 66) = 66
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 63) = 63
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 66) = 66
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 61) = 61
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 62) = 62
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 70) = 70
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../sys"..., 69) = 69
+read(4, "", 4096)                       = 0
+close(4)                                = 0
+write(1, "Loaded 35 mem locations\n", 24) = 24
+write(1, "Starting CPU...\n", 16)       = 16
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../cpu"..., 71) = 71
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../cpu"..., 85) = 85
+time(NULL)                              = 1590014645 (2020-05-20T18:44:05-0400)
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=3536, ...}) = 0
+write(3, "2020-05-20 18:44:05 TRACE ../cpu"..., 72) = 72
+read(0, strace: Process 11053 detached
+ <detached ...>

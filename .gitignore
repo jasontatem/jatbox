@@ -1,6 +1,7 @@
 *.[oa]
 *.bin
 *.log
+jatbox.log
 test
 out
 .vscode/

@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <unistd.h>
+#include <SDL2/SDL.h>
 #ifndef MEMORY_H
 #define MEMORY_H
 #include "memory.h"
@@ -10,6 +12,7 @@
 #include "util.h"
 #endif
 #include "io.h"
+#include "log/log.h"
 
 uint32_t io_dispatcher(systemmemory *mem){
 	//printf("io_dispatcher\n");
@@ -43,6 +46,19 @@ uint32_t serial_console_handler(systemmemory *mem){
 		}
 
 	}
-	
+	// see what we have from the terminal
+	/*
+	uint32_t recv_field = 0;
+	char c = '\0';
+	read(STDIN_FILENO, &c, 1);
+	if (c == '\0'){
+		return 0;
+	} else {
+		recv_field = c;
+		recv_field += (1 << 24);
+		log_trace("Char read from term: %c Value: %d Setting recv_field to %d", c, c, recv_field);
+		mem->memory[SERIAL_CONSOLE_RECV_FROM] = recv_field;
+	}
+	*/
 }
 

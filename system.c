@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <termios.h>
 #include "systemarch.h"
 #include "log/log.h"
+#include "util.h"
 
 int load_bin(char* filename, systemarch *system, uint32_t start_loc){
 	//printf("Mem pointers: %p %p\n", system->memory, system->memory->memory);
@@ -63,6 +65,10 @@ int main(void){
 	logfile = fopen("./jatbox.log", "w");
 	log_set_fp(logfile);
 
+	struct termios *orig_term_settings = malloc(sizeof(struct termios));
+	getTerminalSettings(orig_term_settings);
+	enableRawMode(orig_term_settings);
+
 	printf("Starting...\n");
 	systemarch *system0 = malloc(sizeof(systemarch));
 	printf("Calling system_init\n");
@@ -102,5 +108,6 @@ int main(void){
 	}
 	printf("CPU reported non-zero status: %d, %s\n", system0->cpu->status, cpu_stop_reason(system0->cpu->status));
 	fclose(logfile);
+	disableRawMode(orig_term_settings);
 	return 0;
 }
