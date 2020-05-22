@@ -15,7 +15,9 @@ void system_init(systemarch *sys){
 	cpu0->mem = memory0;
 	sys->cpu = cpu0;
 	sys->memory = memory0;
-};
+	display *d = malloc(sizeof(display));
+	sys->disp = d;
+}
 
 void system_tick(systemarch *sys){
 	cpu_tick(sys->cpu);

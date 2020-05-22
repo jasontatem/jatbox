@@ -1,9 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <termios.h>
+#include <SDL2/SDL.h>
 #include "systemarch.h"
 #include "log/log.h"
 #include "util.h"
+#ifndef DISPLAY_H
+#define DISPLAY_H
+#include "display.h"
+#endif
 
 int load_bin(char* filename, systemarch *system, uint32_t start_loc){
 	//printf("Mem pointers: %p %p\n", system->memory, system->memory->memory);
@@ -78,6 +83,8 @@ int main(void){
 	memory_init(system0->memory);
 	printf("Calling cpu_init\n");
 	cpu_init(system0->cpu);
+	printf("Calling display_init\n");
+	display_init(system0->disp);
 	
 	log_trace("System pointer after init: %p", system0);
 	log_trace("Initial cpu pointer: %p", system0->cpu);
@@ -109,5 +116,6 @@ int main(void){
 	printf("CPU reported non-zero status: %d, %s\n", system0->cpu->status, cpu_stop_reason(system0->cpu->status));
 	fclose(logfile);
 	disableRawMode(orig_term_settings);
+	display_stop(system0->disp);
 	return 0;
 }

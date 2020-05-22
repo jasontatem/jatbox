@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <unistd.h>
-#include <SDL2/SDL.h>
 #ifndef MEMORY_H
 #define MEMORY_H
 #include "memory.h"
@@ -13,6 +12,10 @@
 #endif
 #include "io.h"
 #include "log/log.h"
+#ifndef DISPLAY_H
+#define DISPLAY_H
+#include "display.h"
+#endif
 
 uint32_t io_dispatcher(systemmemory *mem){
 	//printf("io_dispatcher\n");

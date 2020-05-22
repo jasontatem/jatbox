@@ -3,10 +3,15 @@
 #include "memory.h"
 #endif
 #include "cpu.h"
+#ifndef DISPLAY_H
+#define DISPLAY_H
+#include "display.h"
+#endif
 
 typedef struct SystemArch {
 	systemcpu *cpu;
 	systemmemory *memory;
+	display *disp;
 } systemarch;
 
 void system_init(systemarch *sys);
