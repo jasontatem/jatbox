@@ -112,6 +112,9 @@ int main(void){
 				system0->cpu->status = CPU_STATUS_ERR;
 				break;
 			}
+		if (system0->cpu->tick % 10 == 0){
+			display_update(system0->disp, system0->memory);
+		}
 	}
 	printf("CPU reported non-zero status: %d, %s\n", system0->cpu->status, cpu_stop_reason(system0->cpu->status));
 	fclose(logfile);

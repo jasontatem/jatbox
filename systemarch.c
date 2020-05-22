@@ -17,6 +17,7 @@ void system_init(systemarch *sys){
 	sys->memory = memory0;
 	display *d = malloc(sizeof(display));
 	sys->disp = d;
+	sys->disp->pixels = &sys->memory->memory[VRAM_START];
 }
 
 void system_tick(systemarch *sys){
