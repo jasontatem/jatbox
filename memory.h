@@ -9,6 +9,7 @@
 #define BIOS_RANGE_HI 999999
 #define INITIAL_IP 500000
 #define VRAM_START 100000
+#define PROGRAM_START 1000000
 
 
 typedef struct StackFrame {

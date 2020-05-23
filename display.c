@@ -35,7 +35,7 @@ int display_init(display *d){
 	SDL_RenderClear(d->ren);
 	}
 	//d->pixels = malloc(sizeof(uint32_t) * 320 * 240);
-	memset(d->pixels, 0, 320 * 240 * sizeof(uint32_t));
+	//memset(d->pixels, 0, 320 * 240 * sizeof(uint32_t));
 	d->tex = SDL_CreateTexture(d->ren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, 320, 240);
 	log_trace("Display pointers at init: win: %p ren: %p tex: %p pix: %p", d->win, d->ren, d->tex, d->pixels);
     return 0;

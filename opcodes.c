@@ -21,19 +21,30 @@ uint32_t opcode_1_store_mem(instruction currentInstruction, systemcpu *cpu, uint
 	uint32_t value = payload[0];
 	uint32_t location = payload[1];
 	cpu->mem->memory[location] = value;
+	log_trace("Store: put %d in %d and value there is now %d", value, location, cpu->mem->memory[location]);
 	return 0;
 }
 
 uint32_t opcode_2_copy_mem(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]){
-	// arg1 sets the mode of the copy
+	// arg1 sets the mode of the source
 	// - 0: value at memory[source] is copied
 	// - non-zero: value at memory[memory[source]] is copied
+    // arg2 sets the mode of the destination
+	// - 0: value at memory[destination] is set
+	// - non-zero: value at memory[memory[destination]] is set
 	uint32_t source = payload[0];
 	uint32_t destination = payload[1];
+	uint32_t sourceValue;
+
 	if (currentInstruction.arg1 == 0){
-		cpu->mem->memory[destination] = cpu->mem->memory[source];
+		sourceValue = cpu->mem->memory[source];
 	} else {
-		cpu->mem->memory[destination] = cpu->mem->memory[cpu->mem->memory[source]];
+		sourceValue = cpu->mem->memory[cpu->mem->memory[source]];
+	}
+	if (currentInstruction.arg2 == 0){
+		cpu->mem->memory[destination] = sourceValue;
+	} else {
+		cpu->mem->memory[cpu->mem->memory[destination]] = sourceValue;
 	}
 	
 	return 0;
@@ -302,6 +313,35 @@ uint32_t opcode_16_unpack16(instruction currentInstruction, systemcpu *cpu, uint
 uint32_t opcode_17_clear(instruction currentInstruction, systemcpu *cpu){
 	// Clears Status and Result registers on cpu. Status cleared by return
 	cpu->result = 0;
+	return 0;
+}
+
+uint32_t opcode_18_memset(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]){
+	// arg1 determines whether the source is a mem location or explicit value
+	// - 0: mem location
+	// - non-zero: explicit value
+	uint32_t source;
+	uint32_t start_loc = payload[1];
+	uint32_t range_size = payload[2];
+	if (currentInstruction.arg1 == 0){
+		source = cpu->mem->memory[payload[0]];
+	} else {
+		source = payload[0];
+	}
+	//memset(cpu->mem->memory[start_loc], source, sizeof(uint32_t) * range_size);
+	for (int i=start_loc; i<=start_loc + range_size; i++){
+		cpu->mem->memory[i] = source;
+	}
+	return 0;
+}
+
+uint32_t opcode_19_memcpy(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]){
+	uint32_t source_start = payload[0];
+	uint32_t dest_start = payload[1];
+	uint32_t range_size = payload[2];
+	for (int i=0; i<=range_size; i++){
+		cpu->mem->memory[dest_start + i] = cpu->mem->memory[source_start + i];
+	}
 	return 0;
 }
 

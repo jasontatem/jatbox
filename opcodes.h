@@ -28,6 +28,8 @@ uint32_t opcode_14_unpack8(instruction currentInstruction, systemcpu *cpu, uint3
 uint32_t opcode_15_pack16(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
 uint32_t opcode_16_unpack16(instruction currentInstruction, systemcpu *cpu, uint32_t payload[2]);
 uint32_t opcode_17_clear(instruction currentInstruction, systemcpu *cpu);
+uint32_t opcode_18_memset(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
+uint32_t opcode_19_memcpy(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
 
 
 

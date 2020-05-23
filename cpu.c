@@ -131,6 +131,12 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 		case 17: // Clear
 			cpu->status = opcode_17_clear(currentInstruction, cpu);
 			break;
+		case 18: // Memset
+			cpu->status = opcode_18_memset(currentInstruction, cpu, payload);
+			break;
+		case 19: // Memcpy
+			cpu->status = opcode_19_memcpy(currentInstruction, cpu, payload);
+			break;	
 		default:
 			cpu->err = ERR_INVALID_OPCODE;
 	}
@@ -139,7 +145,7 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 
 void cpu_tick(systemcpu *cpu){
 	log_trace("Tick started. SP: %d IP: %d", cpu->sp, cpu->ip);
-	//log_trace("Valwatch: %d %d %d\n", cpu->mem->memory[999007], cpu->mem->memory[999008], cpu->mem->memory[999000]);
+	//printf("Valwatch: %d %d %d\n", cpu->mem->memory[2000000], cpu->mem->memory[2000007], cpu->mem->memory[2000006]);
 	cpu->tick++;
 	uint32_t next_instruction_raw = cpu->mem->memory[cpu->ip];
 	instruction next_instruction = decode_instruction(next_instruction_raw);

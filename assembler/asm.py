@@ -50,7 +50,9 @@ opcodes = [
     Opcode('unpack8', 14, lambda x:x == 2, None, None),
     Opcode('pack16', 15, lambda x:x == 3, None, None),
     Opcode('unpack16', 16, lambda x:x == 2, None, None),
-    Opcode('clear', 17, None, None, None)
+    Opcode('clear', 17, None, None, None),
+    Opcode('memset', 18, lambda x:x == 3, None, None),
+    Opcode('memcpy', 18, lambda x:x == 3, None, None)
 ]
 
 
