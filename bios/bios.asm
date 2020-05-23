@@ -35,6 +35,8 @@ compare 2 1 0 $BIOS_ARG0 0
 branch 3 1 0 3 ``BIOS_FUNC_0_PRINT_STR ``DISPATCHER_RETURN
 compare 2 1 0 $BIOS_ARG0 1
 branch 3 1 0 3 ``BIOS_FUNC_1_PRINT_STR_PACKED ``DISPATCHER_RETURN
+compare 2 1 0 $BIOS_ARG0 2
+branch 3 1 0 3 ``BIOS_FUNC_2_SET_PIXEL ``DISPATCHER_RETURN
 ::DISPATCHER_RETURN
 return 0 0 0
 #
@@ -67,7 +69,7 @@ return 0 0 0
 #
 #
 ::BIOS_FUNC_1_PRINT_STR_PACKED
-# BIOS Function 0: Print String (8 bit packed)
+# BIOS Function 1: Print String (8 bit packed)
 # Inputs -
 # - Arg1: Start of mem range where string is stored, up to 4 chars packed per mem location
 # - Arg2: Length of string (how many mem locations)
@@ -105,6 +107,22 @@ add 3 0 0 $BIOS_ARG1 $BIOS_ARG2 $BIOS_FUNC_1_TARGET
     branch 3 0 0 3 ``BIOS_FUNC_1_RETURN 0
     goto 1 0 0 ``BIOS_FUNC_1_LOOP
 ::BIOS_FUNC_1_RETURN
+return 0 0 0
+#
+#
+#
+::BIOS_FUNC_2_SET_PIXEL
+# BIOS Function 2: Set Pixel
+# Inputs -
+# - Arg1: Pixel X coord (0-319)
+# - Arg2: Pixel Y coord (0-239)
+# - Arg3: Pixel color data (BGRA packed)
+def BIOS_FUNC_2_START_ADDR 100000
+def BIOS_FUNC_2_LOCATION 999000
+mult 3 1 0 $BIOS_ARG2 320 $BIOS_FUNC_2_LOCATION
+add 3 0 0 $BIOS_ARG1 $BIOS_FUNC_2_LOCATION $BIOS_FUNC_2_LOCATION
+add 3 1 0 $BIOS_FUNC_2_LOCATION $BIOS_FUNC_2_START_ADDR $BIOS_FUNC_2_LOCATION
+copy 2 0 1 $BIOS_ARG3 $BIOS_FUNC_2_LOCATION
 return 0 0 0
 #
 #
