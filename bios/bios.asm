@@ -130,4 +130,3 @@ return 0 0 0
 # Data Area - Strings and other useful bits for BIOS functions can go here
 ::BOOT_STR
 =&JatBox BIOS v0.01~nSystem initialized. Jumping to program start.~n
-
