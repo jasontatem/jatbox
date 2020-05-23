@@ -52,7 +52,9 @@ opcodes = [
     Opcode('unpack16', 16, lambda x:x == 2, None, None),
     Opcode('clear', 17, None, None, None),
     Opcode('memset', 18, lambda x:x == 3, None, None),
-    Opcode('memcpy', 18, lambda x:x == 3, None, None)
+    Opcode('memcpy', 19, lambda x:x == 3, None, None),
+    Opcode('setpix', 20, lambda x:x == 4, None, None),
+    Opcode('drawbmap', 21, lambda x:x == 6, None, None)
 ]
 
 

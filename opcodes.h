@@ -30,6 +30,8 @@ uint32_t opcode_16_unpack16(instruction currentInstruction, systemcpu *cpu, uint
 uint32_t opcode_17_clear(instruction currentInstruction, systemcpu *cpu);
 uint32_t opcode_18_memset(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
 uint32_t opcode_19_memcpy(instruction currentInstruction, systemcpu *cpu, uint32_t payload[3]);
+uint32_t opcode_20_setpix(instruction currentInstruction, systemcpu *cpu, uint32_t payload[4]);
+uint32_t opcode_21_drawbmap(instruction currentInstruction, systemcpu *cpu, uint32_t payload[6]);
 
 
 

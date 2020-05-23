@@ -137,6 +137,12 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 		case 19: // Memcpy
 			cpu->status = opcode_19_memcpy(currentInstruction, cpu, payload);
 			break;	
+		case 20: // Setpix
+			cpu->status = opcode_20_setpix(currentInstruction, cpu, payload);
+			break;	
+		case 21: // Draw Bitmap
+			cpu->status = opcode_21_drawbmap(currentInstruction, cpu, payload);
+			break;	
 		default:
 			cpu->err = ERR_INVALID_OPCODE;
 	}
