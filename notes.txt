@@ -16,15 +16,16 @@ BIOS routine calling convention:
 - Range 999000-999979: BIOS routine working mem 
 
 
-
-"print" subroutine:
-- input: start mem addr, length
-- output: dump a result to the status register, 0 for ok, non-zero for err
-- 1: set a counter to start_addr
-- 2: get value, add data_send flag, store in serial mem
-- 3: increment counter
-- 4: compare counter to length
-- 5: if counter > length, go to 2
-- 6: return
-
-
+what if we did have a "sprite table"?
+- Sprite table itself would need to have a max size
+--- How big? Let's say 100?
+--- What does a sprite table entry consist of?
+----- Sprite meta - can we get away with a single 32bit int?
+------- Width, Height (OK with 256x256 as max), Active, Transparency
+----- Start loc
+----- Length can be calced from W * H
+- With sprites defined in the table, how do we tell the display where / how many to draw?
+--- Sprite draw table?
+----- What does a draw entry consist of?
+-------- X, Y (maybe packed 16 for these to get full range?)
+-------- sprite num, order?

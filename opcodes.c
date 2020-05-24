@@ -367,9 +367,11 @@ uint32_t opcode_21_drawbmap(instruction currentInstruction, systemcpu *cpu, uint
 	uint32_t range_size = width * height;
 	int i, j;
 	int count = 0;
-	for (i=0; i<=height; i++){
-		for (j=0; j<=width; j++){
-			cpu->mem->memory[(y + i) * 320 + x + offset + j] = cpu->mem->memory[start_loc + i];
+	for (i=0; i<height; i++){
+		for (j=0; j<width; j++){
+			int vmem_target = (y + i) * 320 + x + offset + j;
+			int source = start_loc + count;
+			cpu->mem->memory[vmem_target] = cpu->mem->memory[source];
 			count++;
 		}
 	}
