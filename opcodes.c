@@ -378,3 +378,40 @@ uint32_t opcode_21_drawbmap(instruction currentInstruction, systemcpu *cpu, uint
 	return 0;
 }
 
+uint32_t opcode_22_drawbmap_p(instruction currentInstruction, systemcpu *cpu, uint32_t payload[7]){
+	uint32_t x = cpu->mem->memory[payload[0]];
+	uint32_t y = cpu->mem->memory[payload[1]];
+	uint32_t width = cpu->mem->memory[payload[2]];
+	uint32_t height = cpu->mem->memory[payload[3]];
+	uint32_t start_loc = cpu->mem->memory[payload[4]];
+	uint32_t offset = payload[5];
+	uint32_t color = cpu->mem->memory[payload[6]];
+	log_trace("Placing packed bitmap x: %d y: %d width: %d height: %d start_loc: %d offset: %d color: %d", x, y, width, height, start_loc, offset, color);
+	uint32_t range_size = width * height;
+	int i, j;
+	int bitcounter = 0;
+	int segcounter = 0;
+	uint32_t segments = range_size / 32;
+	if (range_size % 32 != 0){
+		segments++;
+	}
+	uint32_t segment = cpu->mem->memory[start_loc];
+	for (bitcounter=0; bitcounter < range_size; bitcounter++){
+		if (bitcounter % 32 == 0 && bitcounter != 0){
+			segcounter++;
+			segment = cpu->mem->memory[start_loc + segcounter];
+		}
+		uint32_t bit = extract_bits(segment, 1, bitcounter % 32 + 1);
+		log_trace("drawbmap_p state - bitcounter: %d segcounter: %d segment: %u bit: %d", bitcounter, segcounter, segment, bit);
+		if (bit == 1){
+			uint32_t vmem_target = (y + (bitcounter / width)) * 320 + x + offset + (bitcounter % width);
+			cpu->mem->memory[vmem_target] = color;
+			log_trace("drawbmap_p state - bitcounter: %d vmem_target: %d", bitcounter, vmem_target);
+		}
+
+	}
+	return 0;
+}
+
+
+
