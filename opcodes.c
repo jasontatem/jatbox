@@ -413,5 +413,16 @@ uint32_t opcode_22_drawbmap_p(instruction currentInstruction, systemcpu *cpu, ui
 	return 0;
 }
 
+uint32_t opcode_23_rand(instruction currentInstruction, systemcpu *cpu, uint32_t payload[1]){
+	uint32_t destination = payload[0];
+	uint32_t value = rand() * 2;
+	if (currentInstruction.arg1 == 0){
+		cpu->mem->memory[destination] = value;
+	} else {
+		cpu->mem->memory[cpu->mem->memory[destination]] = value;
+	}
+	return 0;
+}
+
 
 

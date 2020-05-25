@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <termios.h>
 #include <SDL2/SDL.h>
+#include <sys/time.h>
 #include "systemarch.h"
 #include "log/log.h"
 #include "util.h"
@@ -9,6 +10,11 @@
 #define DISPLAY_H
 #include "display.h"
 #endif
+
+
+float timedifference_msec(struct timeval t0, struct timeval t1){
+    return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
+}
 
 int load_bin(char* filename, systemarch *system, uint32_t start_loc){
 	//printf("Mem pointers: %p %p\n", system->memory, system->memory->memory);
@@ -65,6 +71,7 @@ char *cpu_err_reason(cpu_err){
 }
 
 int main(void){
+	srand(time(0));
 	log_set_quiet(1);
 	FILE *logfile;
 	logfile = fopen("./jatbox.log", "w");
@@ -105,6 +112,7 @@ int main(void){
 	printf("Starting CPU...\n");
 
 	system0->cpu->ip = INITIAL_IP;
+	
 	while(system0->cpu->status == 0){
 		system_tick(system0);
 			if(system0->cpu->err != 0){
@@ -112,7 +120,7 @@ int main(void){
 				system0->cpu->status = CPU_STATUS_ERR;
 				break;
 			}
-		if (system0->cpu->tick % 10 == 0){
+		if (system0->cpu->tick % 50000 == 0){
 			display_update(system0->disp, system0->memory);
 		}
 	}

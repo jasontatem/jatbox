@@ -55,7 +55,8 @@ opcodes = [
     Opcode('memcpy', 19, lambda x:x == 3, None, None),
     Opcode('setpix', 20, lambda x:x == 4, None, None),
     Opcode('drawbmap', 21, lambda x:x == 6, None, None),
-    Opcode('drawbmap_p', 22, lambda x:x == 7, None, None)
+    Opcode('drawbmap_p', 22, lambda x:x == 7, None, None),
+    Opcode('rand', 23, lambda x:x == 1, None, None)
 ]
 
 

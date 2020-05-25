@@ -146,6 +146,9 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 		case 22: // Draw Packed Bitmap
 			cpu->status = opcode_22_drawbmap_p(currentInstruction, cpu, payload);
 			break;	
+		case 23: // Random Number
+			cpu->status = opcode_23_rand(currentInstruction, cpu, payload);
+			break;
 		default:
 			cpu->err = ERR_INVALID_OPCODE;
 	}
