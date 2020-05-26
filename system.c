@@ -112,6 +112,13 @@ int main(void){
 	printf("Starting CPU...\n");
 
 	system0->cpu->ip = INITIAL_IP;
+
+	struct timeval disp_last_refreshed;
+	struct timeval current_time;
+
+	gettimeofday(&disp_last_refreshed, 0);
+	gettimeofday(&current_time, 0);
+
 	
 	while(system0->cpu->status == 0){
 		system_tick(system0);
@@ -120,8 +127,11 @@ int main(void){
 				system0->cpu->status = CPU_STATUS_ERR;
 				break;
 			}
-		if (system0->cpu->tick % 50000 == 0){
-			display_update(system0->disp, system0->memory);
+		if (system0->cpu->tick % 50 == 0){
+			gettimeofday(&current_time, 0);
+			if (timedifference_msec(disp_last_refreshed, current_time) > 17.0f){
+				display_update(system0->disp, system0->memory);
+			}
 		}
 	}
 	printf("CPU reported non-zero status: %d, %s\n", system0->cpu->status, cpu_stop_reason(system0->cpu->status));
