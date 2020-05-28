@@ -18,6 +18,7 @@ typedef struct Cpu {
 	uint32_t status;  // status register
 	uint32_t tick;  // tick counter
 	uint32_t halt;  // halt flag
+	uint32_t dsync;  // display sync flag
 	
 	// system memory
 	systemmemory *mem;

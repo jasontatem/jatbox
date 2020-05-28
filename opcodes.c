@@ -424,5 +424,11 @@ uint32_t opcode_23_rand(instruction currentInstruction, systemcpu *cpu, uint32_t
 	return 0;
 }
 
+uint32_t opcode_24_dsync(instruction currentInstruction, systemcpu *cpu){
+	cpu->dsync = 1;
+	log_trace("dsync called, CPU should stop until next display refresh");
+	return 0;
+}
+
 
 

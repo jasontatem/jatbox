@@ -16,6 +16,7 @@ uint32_t cpu_init(systemcpu *cpu){
 	cpu->status = 0;
 	cpu->result = 0;
 	cpu->tick = 0;
+	cpu->dsync = 0;
 	return 0;
 };
 
@@ -148,6 +149,9 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 			break;	
 		case 23: // Random Number
 			cpu->status = opcode_23_rand(currentInstruction, cpu, payload);
+			break;
+		case 24: // Display Sync
+			cpu->status = opcode_24_dsync(currentInstruction, cpu);
 			break;
 		default:
 			cpu->err = ERR_INVALID_OPCODE;

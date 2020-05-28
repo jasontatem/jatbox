@@ -34,6 +34,7 @@ uint32_t opcode_20_setpix(instruction currentInstruction, systemcpu *cpu, uint32
 uint32_t opcode_21_drawbmap(instruction currentInstruction, systemcpu *cpu, uint32_t payload[6]);
 uint32_t opcode_22_drawbmap_p(instruction currentInstruction, systemcpu *cpu, uint32_t payload[7]);
 uint32_t opcode_23_rand(instruction currentInstruction, systemcpu *cpu, uint32_t payload[1]);
+uint32_t opcode_24_dsync(instruction currentInstruction, systemcpu *cpu);
 
 
 
