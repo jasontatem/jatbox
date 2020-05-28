@@ -6,17 +6,27 @@ def BITMAP_START 2000004
 def H 2000005
 def XDIR 2000006
 def YDIR 2000007
+def X2 2000008
+def Y2 2000009
 store 2 0 0 0 $X
 store 2 0 0 0 $Y
-store 2 0 0 8 $W
-store 2 0 0 8 $H
 store 2 0 0 4278190335 $COLOR_VAL
 store 2 0 0 0 $XDIR
 store 2 0 0 0 $YDIR
 ::LOOP
 memset 3 1 0 0 100000 76800
+store 2 0 0 8 $W
+store 2 0 0 8 $H
 store 2 0 0 ``PACKED_DATA_2 $BITMAP_START
 drawbmap_p 7 0 0 $X $Y $W $H $BITMAP_START $VRAM_START $COLOR_VAL
+store 2 0 0 320 $X2
+store 2 0 0 240 $Y2
+sub 3 0 0 $X2 $X $X2
+sub 3 0 0 $Y2 $Y $Y2
+store 2 0 0 8 $W
+store 2 0 0 5 $H
+store 2 0 0 ``PACKED_BITMAP_DATA $BITMAP_START
+drawbmap_p 7 0 0 $X2 $Y2 $W $H $BITMAP_START $VRAM_START $COLOR_VAL
 compare 2 1 0 $XDIR 0
 branch 3 0 0 3 ``X_ADD 0
 ::X_SUB
