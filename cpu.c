@@ -161,9 +161,10 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 
 void cpu_tick(systemcpu *cpu){
 	log_trace("Tick started. SP: %d IP: %d", cpu->sp, cpu->ip);
-	//printf("Valwatch: %d %d %d\n", cpu->mem->memory[2000000], cpu->mem->memory[2000007], cpu->mem->memory[2000006]);
+	//log_warn("Valwatch: %u %u %u %u", cpu->mem->memory[2000001], cpu->mem->memory[2000002], cpu->mem->memory[2000003], cpu->mem->memory[2000004]);
 	cpu->tick++;
 	uint32_t next_instruction_raw = cpu->mem->memory[cpu->ip];
+	log_trace("Calling decode for raw instruction %u at IP %u", next_instruction_raw, cpu->ip);
 	instruction next_instruction = decode_instruction(next_instruction_raw);
 	opcode_dispatcher(next_instruction, cpu);
 	log_trace("Tick finished. SP: %d IP: %d", cpu->sp, cpu->ip); 

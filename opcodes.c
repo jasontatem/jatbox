@@ -35,12 +35,12 @@ uint32_t opcode_2_copy_mem(instruction currentInstruction, systemcpu *cpu, uint3
 	uint32_t source = payload[0];
 	uint32_t destination = payload[1];
 	uint32_t sourceValue;
-
 	if (currentInstruction.arg1 == 0){
 		sourceValue = cpu->mem->memory[source];
 	} else {
 		sourceValue = cpu->mem->memory[cpu->mem->memory[source]];
 	}
+	//log_warn("Single value copy: %d %d %u %u %u", currentInstruction.arg1, currentInstruction.arg2, source, destination, sourceValue);
 	if (currentInstruction.arg2 == 0){
 		cpu->mem->memory[destination] = sourceValue;
 	} else {
@@ -113,7 +113,7 @@ uint32_t opcode_8_compare(instruction currentInstruction, systemcpu *cpu, uint32
 	} else {
 		b = cpu->mem->memory[payload[1]];
 	}
-	log_trace("Comparing a: %d b: %d", a, b);
+	log_trace("Comparing a: %u b: %u", a, b);
 	if (a > b){
 		cpu->result = COMPARE_RESULT_GT;
 	}
@@ -339,10 +339,11 @@ uint32_t opcode_19_memcpy(instruction currentInstruction, systemcpu *cpu, uint32
 	uint32_t source_start = payload[0];
 	uint32_t dest_start = payload[1];
 	uint32_t range_size = payload[2];
+	printf("memcpy called: %u %u %u\n", source_start, dest_start, range_size);
 	for (int i=0; i<=range_size; i++){
 		cpu->mem->memory[dest_start + i] = cpu->mem->memory[source_start + i];
 	}
-	return 0;
+	return 0;	
 }
 
 uint32_t opcode_20_setpix(instruction currentInstruction, systemcpu *cpu, uint32_t payload[4]){
