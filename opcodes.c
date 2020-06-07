@@ -339,7 +339,7 @@ uint32_t opcode_19_memcpy(instruction currentInstruction, systemcpu *cpu, uint32
 	uint32_t source_start = payload[0];
 	uint32_t dest_start = payload[1];
 	uint32_t range_size = payload[2];
-	printf("memcpy called: %u %u %u\n", source_start, dest_start, range_size);
+	log_trace("memcpy called: %u %u %u\n", source_start, dest_start, range_size);
 	for (int i=0; i<=range_size; i++){
 		cpu->mem->memory[dest_start + i] = cpu->mem->memory[source_start + i];
 	}
@@ -364,7 +364,7 @@ uint32_t opcode_21_drawbmap(instruction currentInstruction, systemcpu *cpu, uint
 	uint32_t height = cpu->mem->memory[payload[3]];
 	uint32_t start_loc = cpu->mem->memory[payload[4]];
 	uint32_t offset = payload[5];
-	log_trace("Placing bitmap x: %d y: %d width: %d height: %d start_loc: %d offset: %d", x, y, width, height, start_loc, offset);
+	//log_warn("Placing bitmap x: %d y: %d width: %d height: %d start_loc: %d offset: %d", x, y, width, height, start_loc, offset);
 	uint32_t range_size = width * height;
 	int i, j;
 	int count = 0;

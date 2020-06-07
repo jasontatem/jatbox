@@ -134,7 +134,7 @@ int main(void){
 		if (diff >= 16.666666f){
 			display_update(system0->disp, system0->memory);
 			gettimeofday(&disp_last_refreshed, 0);
-			log_warn("Display Update: %f ms, CPU tick %d", diff, system0->cpu->tick);
+			//log_warn("Display Update: %f ms, CPU tick %d", diff, system0->cpu->tick);
 			if (system0->cpu->dsync == 1){
 				system0->cpu->dsync = 0;
 			}

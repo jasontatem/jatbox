@@ -143,6 +143,7 @@ void opcode_dispatcher(instruction currentInstruction, systemcpu *cpu){
 			break;	
 		case 21: // Draw Bitmap
 			cpu->status = opcode_21_drawbmap(currentInstruction, cpu, payload);
+			log_trace("drawbmap payload: %u %u %u %u %u %u", payload[0], payload[1], payload[2], payload[3], payload[4], payload[5]);
 			break;
 		case 22: // Draw Packed Bitmap
 			cpu->status = opcode_22_drawbmap_p(currentInstruction, cpu, payload);
