@@ -11,6 +11,7 @@
 #include "display.h"
 #endif
 
+#define DISP_REFRESH_MIN_TICKS 200
 
 float timedifference_msec(struct timeval t0, struct timeval t1){
     return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
@@ -119,6 +120,10 @@ int main(void){
 	gettimeofday(&disp_last_refreshed, 0);
 	gettimeofday(&current_time, 0);
 
+	struct timeval cpu_start_time;
+	struct timeval cpu_stop_time;
+	gettimeofday(&cpu_start_time, 0);
+
 	
 	while(system0->cpu->status == 0){
 		if (system0->cpu->dsync != 1){
@@ -129,19 +134,28 @@ int main(void){
 				break;
 			}
 		}
-		gettimeofday(&current_time, 0);
-		float diff = timedifference_msec(disp_last_refreshed, current_time);
-		if (diff >= 16.666666f){
-			display_update(system0->disp, system0->memory);
-			gettimeofday(&disp_last_refreshed, 0);
-			//log_warn("Display Update: %f ms, CPU tick %d", diff, system0->cpu->tick);
-			if (system0->cpu->dsync == 1){
-				system0->cpu->dsync = 0;
+		
+		if (system0->cpu->dsync == 1 || system0->cpu->tick % DISP_REFRESH_MIN_TICKS == 0){
+			gettimeofday(&current_time, 0);
+			float diff = timedifference_msec(disp_last_refreshed, current_time);
+			if (diff >= 16.666666f){
+				display_update(system0->disp, system0->memory);
+				gettimeofday(&disp_last_refreshed, 0);
+				//log_warn("Display Update: %f ms, CPU tick %d", diff, system0->cpu->tick);
+				if (system0->cpu->dsync == 1){
+					system0->cpu->dsync = 0;
+				}
 			}
 		}
 		
+		
 	}
+	gettimeofday(&cpu_stop_time, 0);
 	printf("CPU reported non-zero status: %d, %s\n", system0->cpu->status, cpu_stop_reason(system0->cpu->status));
+	
+	float cpu_runtime = timedifference_msec(cpu_start_time, cpu_stop_time);
+	printf("CPU was running for %f ms\n", cpu_runtime);
+
 	fclose(logfile);
 	disableRawMode(orig_term_settings);
 	display_stop(system0->disp);
