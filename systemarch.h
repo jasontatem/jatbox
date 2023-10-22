@@ -12,6 +12,7 @@ typedef struct SystemArch {
 	systemcpu *cpu;
 	systemmemory *memory;
 	display *disp;
+	uint32_t tick;
 } systemarch;
 
 void system_init(systemarch *sys);

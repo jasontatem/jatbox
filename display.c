@@ -18,7 +18,7 @@ int display_init(display *d){
 		return EXIT_FAILURE;
 	}
 
-    d->win = SDL_CreateWindow("JatBox", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+    d->win = SDL_CreateWindow("JatBox", 100, 100, 1280, 960, SDL_WINDOW_SHOWN);
 	if (d->win == NULL) {
 		fprintf(stderr, "SDL_CreateWindow Error: %s\n", SDL_GetError());
 		return EXIT_FAILURE;

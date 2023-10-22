@@ -3,10 +3,10 @@ store 2 0 0 0 $COUNTER
 ::REPEAT
 store 2 0 0 ``STRING_DATA $BIOS_ARG1
 store 2 0 0 8 $BIOS_ARG2
-jump 1 0 0 ``SUB_START
+jump 2 0 0 ``SUB_START 0
 add 3 1 0 $COUNTER 1 $COUNTER
 compare 2 1 0 $COUNTER 5
-branch 2 0 0 3 ``HALT
+branch 3 0 0 3 ``HALT 0
 goto 1 0 0 ``REPEAT
 ::HALT
 halt 0 0 0
@@ -23,7 +23,7 @@ add 3 1 0 $TMP_DAT 1 $TMP_DAT
 copy 2 0 0 $TMP_DAT $SERIAL_OUT
 add 3 1 0 $POINTER 1 $POINTER
 compare 2 1 1 $POINTER $TARGET
-branch 2 0 0 3 ``SUB_RETURN
+branch 3 0 0 3 ``SUB_RETURN 0
 goto 1 0 0 ``LOOP # back to loop start
 ::SUB_RETURN
 return 0 0 0

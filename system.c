@@ -124,8 +124,13 @@ int main(void){
 	struct timeval cpu_stop_time;
 	gettimeofday(&cpu_start_time, 0);
 
+	struct timeval cpu_stat_last_update;
+	gettimeofday(&cpu_stat_last_update, 0);
+
+	uint32_t cpu_tick_last_val = 0;
 	
 	while(system0->cpu->status == 0){
+		system0->tick++;
 		if (system0->cpu->dsync != 1){
 			system_tick(system0);
 			if(system0->cpu->err != 0){
@@ -146,6 +151,16 @@ int main(void){
 					system0->cpu->dsync = 0;
 				}
 			}
+		}
+
+		if (system0->tick % 10000000 == 0) {
+			gettimeofday(&current_time, 0);
+			float diff = timedifference_msec(cpu_stat_last_update, current_time);
+			float cpu_cycles_per_sec = (system0->cpu->tick - cpu_tick_last_val) / diff * 1000;
+			float system_cycles_per_sec = 10000000 / diff * 1000;
+			printf("%d system cycles: %f ms, %f system cycles/sec, %f cpu cycles/sec, cpu skipped %d cycles\n", system0->tick, diff, system_cycles_per_sec, cpu_cycles_per_sec, 10000000 - (system0->cpu->tick - cpu_tick_last_val));
+			gettimeofday(&cpu_stat_last_update, 0);
+			cpu_tick_last_val = system0->cpu->tick;
 		}
 		
 		

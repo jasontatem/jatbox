@@ -131,6 +131,7 @@ branch 3 0 0 2 ``CELL_START 0
 memcpy 3 0 0 $NEW_GRID_START $GRID_START 76800
 store 2 0 0 $GRID_START $TMPVAL
 drawbmap 6 0 0 $DRAW_X $DRAW_Y $W $H $TMPVAL $VRAM_START
+dsync 0 0 0
 goto 1 0 0 ``LIFE_ITER_START
 
 
